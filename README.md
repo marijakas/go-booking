@@ -22,4 +22,24 @@ Registrovani korisnik ima mogućnost da ocenjuje i komentarise turističke desti
 
 Arhitektura koja bi se koristila za implementaciju sistema bi bila zasnovana na mikroservisima za čiji razvoj bi se koristili jezici Go, Pharo i Python.  
 
+<h3>Korisnički servis</h3>
+
+Flask servis koji omogućava registraciju i prijavu korisnika kao i dodavanje novih administratora i turističkih vodiča.
+
+<h3>Mikroservis za turističke destinacije</h3>
+
+Go servis koji omogućuje dodavanje, izmenu i brisanje konkretnih turističkih destinacija.
+
+<h3>Mikroservis za ocene i komentare</h3>
+
+Go servis za ocenjivanje i komentarisanje destinacija od strane registrovanih korisnika, kao i brisanje komentara.
+
+<h3>Mikroservis za rezervaciju putovanja</h3>
+
+Go servis koji omogućuje registrovanim korisnicima da rezervišu putovanja i otkazuju rezervacije.
+
+<h3>Mikroservis za analitiku</h3>
+
+Pharo servis koji omogućuje prikaz izveštaja navedenih u okviru funkcionalnosti administratora sistema.
+
 

@@ -16,7 +16,7 @@ Administrator sistema ima mogućnost registracije novih administratora sistema i
 
 <h3>Registrovani korisnik - funkcionalnosti</h3>
 
-Registrovani korisnik ima mogućnost da ocenjuje i komentarise turističke destinacije, kao i da obriše svoj komentar. Ima mogućnost da rezerviše putovanje za određenu destinaciju, kao i pregled i poništavanje rezervacija. 
+Registrovani korisnik ima mogućnost da ocenjuje i komentariše turističke destinacije, kao i da obriše svoj komentar. Ima mogućnost da rezerviše putovanje za određenu destinaciju, pregled svojih rezervacija kao i poništavanje rezervacija. 
 
 <h2>Arhitektura sistema</h2>
 

@@ -1,0 +1,27 @@
+<form [formGroup]="loginForm" class="novaForma" (ngSubmit)="onSubmit()">
+    <h2>Login</h2>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input id="email" type="email" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required" name="usernameReqLogin">Username is required</div>
+            <div *ngIf="f.username.errors.email" name="usernameEmailFormatLogin">Username is not in valid format</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input id="pass" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required" name="passwordReqLogin">Password is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <!-- <button id="loginBtn" [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
+        <button id="loginBtn" class="btn btn-primary" name="buttonForLogin">
+          
+            Login
+        </button>
+        <a routerLink="/registration" class="btn btn-link">Register</a>
+    </div>
+</form>

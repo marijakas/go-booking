@@ -1,7 +1,7 @@
 from flask import request
 from flask_restplus import Resource
 
-from ..service.auth_service import sign_in, get_current_user, sign_out, sign_up
+from ..service.auth_service import sign_in, get_current_user, sign_out, sign_up, add_admin, add_guide
 from ..util.dto import AuthDto, UserDto
 
 api = AuthDto.api
@@ -44,3 +44,20 @@ class CurrentUser(Resource):
     def get(self):
         headers = request.headers
         return get_current_user(headers)
+
+@api.route('/add-admin')
+class AddAdmin(Resource):
+    @api.doc('add admin')
+    @api.expect(_new_user, validate=True)
+    def post(self):
+        data = request.json
+        return add_admin(data, request.headers)
+
+
+@api.route('/add-guide')
+class AddAdmin(Resource):
+    @api.doc('add guide')
+    @api.expect(_new_user, validate=True)
+    def post(self):
+        data = request.json
+        return add_guide(data, request.headers)

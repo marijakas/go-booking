@@ -11,12 +11,24 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HomePageAdminComponent } from './components/home-page-admin/home-page-admin.component';
+import { AddAdminComponent } from './components/add-admin/add-admin.component';
+import { AddGuideComponent } from './components/add-guide/add-guide.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HomePageAdminComponent,
+    AddAdminComponent,
+    AddGuideComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +38,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatSnackBarModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

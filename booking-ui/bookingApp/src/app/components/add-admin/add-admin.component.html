@@ -1,0 +1,80 @@
+<div>
+    <div class="add-title">
+      <h2 class="primary">Add new admin</h2>
+    </div>
+    <div>
+      <form [formGroup]="addCusForm" (change)="formChanged()">
+        <mat-grid-list cols="1"   rowHeight="85px" (window:resize)="onResize($event)">
+
+            <mat-grid-tile >
+             <div>
+                <mat-form-field>
+                    <input matInput placeholder="Name of user" value={{first_name}} formControlName="first_name" name="first_name"  required>
+                    <mat-error *ngIf="addCusForm.controls.first_name.hasError('required')" name="nameReq">
+                      Please enter name
+                    </mat-error>
+                   
+                  </mat-form-field>
+             </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile >
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Last name of user" value={{last_name}} formControlName="last_name" name="last_name"  required>
+                        <mat-error *ngIf="addCusForm.controls.last_name.hasError('required')" name="nameReq">
+                        Please enter last name
+                        </mat-error>
+                    
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            
+            <mat-grid-tile >
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Email of user" value={{email}} formControlName="email" name="email"  required>
+                        <mat-error *ngIf="addCusForm.controls.email.hasError('required')" name="nameReq">
+                        Please enter email
+                        </mat-error>
+                    
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>  
+             
+       
+            <mat-grid-tile >
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Username of user" value={{username}} formControlName="username" name="username"  required>
+                        <mat-error *ngIf="addCusForm.controls.username.hasError('required')" name="nameReq">
+                        Please enter username
+                        </mat-error>
+                    
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>  
+
+            <mat-grid-tile >
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Password of user" value={{password}} formControlName="password" name="password"  required>
+                        <mat-error *ngIf="addCusForm.controls.password.hasError('required')" name="nameReq">
+                        Please enter password
+                        </mat-error>
+                    
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile> 
+
+    </mat-grid-list>
+        <div class="btn-sec">
+          <button mat-raised-button type="submit" color="primary" class="Update-btn"  [disabled]="!saveChangesEnabled()" name="saveSubcategory" (click)="onAddCus()" >Save</button>
+          <button mat-raised-button type="button" class="Discard-btn"  (click)="openDialog()" >Cancel</button>
+        </div>
+  
+      </form>
+  
+    </div>
+  </div>
+  

@@ -16,19 +16,72 @@ def sign_in(data):
         "user": user
     }, 200
 
+def add_guide(data, headers):
+    auth_header = headers.get('Authorization')
+    if not auth_header or "Bearer " not in auth_header:
+        return unauthorized("Only admin can add new  guides.")
+    else:
+        try:
+            if User.decode_auth_token(auth_header.split(" ")[1]).get('role') != 'ROLE_ADMIN':
+                return unauthorized("Only admin can add new guides.")
+        except:
+            return unauthorized("Only admin can add new guides.")
+    user_by_username = User.query.filter_by(username=data.get('username')).first()
+    user_by_email = User.query.filter_by(email=data.get('email')).first()
+    if not user_by_username and not user_by_email:
+        try:
+            new_user = User(
+                username=data.get('username'),
+                email=data.get('email'),
+                first_name=data.get('first_name'),
+                last_name=data.get('last_name'),
+                password=generate_password_hash(data.get('password')),
+                role='ROLE_GUIDE'
+            )
 
+            db.session.add(new_user)
+            db.session.commit()
+
+            return ok('Successfully registered.')
+
+        except Exception as e:
+            return bad_request('Some error occurred. Please try again.')
+    else:
+        return bad_request('User already exists. Please Log in.')
+
+def add_admin(data, headers):
+    auth_header = headers.get('Authorization')
+    if not auth_header or "Bearer " not in auth_header:
+        return unauthorized("Only admin can add new admins.")
+    else:
+        try:
+            if User.decode_auth_token(auth_header.split(" ")[1]).get('role') != 'ROLE_ADMIN':
+                return unauthorized("Only admin can add new admins .")
+        except:
+            return unauthorized("Only admin can add new admins.")
+    user_by_username = User.query.filter_by(username=data.get('username')).first()
+    user_by_email = User.query.filter_by(email=data.get('email')).first()
+    if not user_by_username and not user_by_email:
+        try:
+            new_user = User(
+                username=data.get('username'),
+                email=data.get('email'),
+                first_name=data.get('first_name'),
+                last_name=data.get('last_name'),
+                password=generate_password_hash(data.get('password')),
+                role='ROLE_ADMIN'
+            )
+
+            db.session.add(new_user)
+            db.session.commit()
+
+            return ok('Successfully registered.')
+
+        except Exception as e:
+            return bad_request('Some error occurred. Please try again.')
+    else:
+        return bad_request('User already exists. Please Log in.')
 def sign_up(data, headers):
-    # if data.get('role') != 'ROLE_REGISTERED_USER':
-    #     auth_header = headers.get('Authorization')
-    #     if not auth_header or "Bearer " not in auth_header:
-    #         return unauthorized("Only admin can add new admins and guides.")
-    #     else:
-    #         try:
-    #             if User.decode_auth_token(auth_header.split(" ")[1]).get('role') != 'ROLE_ADMIN':
-    #                 return unauthorized("Only admin can add new admins and guides.")
-    #         except:
-    #             return unauthorized("Only admin can add new admins and guides.")
-
     user_by_username = User.query.filter_by(username=data.get('username')).first()
     user_by_email = User.query.filter_by(email=data.get('email')).first()
     if not user_by_username and not user_by_email:

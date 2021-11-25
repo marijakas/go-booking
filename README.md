@@ -42,4 +42,8 @@ Go servis koji omogućuje registrovanim korisnicima da rezervišu putovanja i ot
 
 Pharo servis koji omogućuje prikaz izveštaja navedenih u okviru funkcionalnosti administratora sistema.
 
+<h3>Angular client</h3>
+
+Omogućava pristup svim funkcionalnostima sistema.
+
 

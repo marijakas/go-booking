@@ -70,6 +70,8 @@ func main(){
 	router.HandleFunc("/api/destination/{id:[0-9]+}", GetOneDestination).Methods("GET")
 	router.HandleFunc("/api/addDestination", AddDestination).Methods("POST")
 	router.HandleFunc("/api/updateDestination/{id:[0-9]+}", UpdateDestination).Methods("PUT")
+	router.HandleFunc("/api/updateDestinationAverage/{id:[0-9]+}/{average[0-9]+\\.?[0-9]*}", UpdateDestinationAverageRate).Methods("PUT")
+	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteDestination).Methods("DELETE")
 
 
 
@@ -173,6 +175,58 @@ func UpdateDestination(rw http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		http.Error(rw, "Destination not found", http.StatusInternalServerError)
+		return
+	}
+}
+
+func UpdateDestinationAverageRate(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+	average, err := strconv.ParseFloat(vars["average"], 32)
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+
+
+
+	err = data_model.UpdateDestinationAverageRate(id, float32(average))
+
+	if err == data_model.ErrDestinationNotFound {
+		http.Error(rw, "Destination not found", http.StatusNotFound)
+		return
+	}
+
+	if err != nil {
+		http.Error(rw, "Destination not found", http.StatusInternalServerError)
+		return
+	}
+}
+
+func  DeleteDestination(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+	//authHeader := r.Header.Get("Authorization")
+	//splitToken := strings.Split(authHeader, "Bearer ")
+	//reqToken := splitToken[1]
+
+
+	err = data_model.DeleteDestination(id)
+
+	if err == data_model.ErrDestinationCannotBeDeleted {
+		http.Error(rw, "Destination not found", http.StatusNotFound)
+		return
+	}
+	if err ==data_model.ErrDestinationCannotBeDeleted  {
+		http.Error(rw, "Destination can't be deleted because it has travels", http.StatusBadRequest)
 		return
 	}
 }

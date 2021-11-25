@@ -1,6 +1,7 @@
 package data_model
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -8,6 +9,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"io"
 	"log"
+	"net/http"
 )
 
 type Destination struct {
@@ -16,7 +18,7 @@ type Destination struct {
 	Name        string  `json:"name" validate:"required"`
 	Country string  `json:"country" validate:"required"`
 	Description string  `json:"description" validate:"required"`
-	verageRate float32 `json:"average_rate"`
+	AverageRate float32 `json:"average_rate"`
 }
 
 
@@ -53,7 +55,28 @@ func (d *Destionations) ToJSON(w io.Writer) error {
 var db *gorm.DB
 var err error
 
-func GetDestionations() Destionations {
+var ErrDestinationNotFound = fmt.Errorf("Destination not found")
+
+func FindDestination(id int) (*Destination, error) {
+	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	if err != nil{
+		log.Fatal(err)
+	}else{
+		fmt.Println("Successfuly connected to database!")
+	}
+	defer db.Close()
+
+	var destination Destination
+	result := db.First(&destination, id)
+
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) || result.RowsAffected == 0 {
+		return nil, ErrDestinationNotFound
+	}
+
+	return &destination, nil
+}
+
+func GetDestinations() Destionations {
 	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
@@ -82,21 +105,44 @@ func AddDestination(d *Destination) {
 	defer db.Close()
 	db.Create(d)
 }
-var ErrDestinationNotFound = fmt.Errorf("Destination not found")
 
-func FindDestination(id int) (*Destination, error) {
+
+func UpdateDestination(id int, d *Destination) error {
+	destination, err := FindDestination(id)
+	if err != nil {
+		return err
+	}
+
 	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
 
-	var destination Destination
-	result := db.First(&destination, id)
+	oldName := destination.Name
 
-	if errors.Is(result.Error, gorm.ErrRecordNotFound) || result.RowsAffected == 0 {
-		return nil, ErrDestinationNotFound
+	destination.Name = d.Name
+	destination.Description = d.Description
+	destination.Country = d.Country
+	destination.AverageRate = d.AverageRate
+
+	//ako se izmeni naziv destinacije treba ga promeniti u svim putovanjima gde se pojavljivala ta destinacija
+	if oldName != d.Name {
+		//var bearer = "Bearer " + token
+		jsonValue, _ := json.Marshal(destination)
+		req, err := http.NewRequest("PUT", "http://localhost:9091/api/travels", bytes.NewBuffer(jsonValue))
+		//req.Header.Add("Authorization", bearer)
+
+		client := &http.Client{}
+		resp, err := client.Do(req)
+		if err != nil {
+			return err
+		}
+		defer resp.Body.Close()
 	}
 
-	return &destination, nil
+	db.Save(destination)
+
+	return nil
 }
+

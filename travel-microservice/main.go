@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"time"
 	"travel-microservice/data_model"
 )
@@ -36,7 +37,12 @@ func main() {
 	db.AutoMigrate(&data_model.Travel{})
 
 	router := mux.NewRouter()
+	router.HandleFunc("/api/getTravels", GetTravels).Methods("GET")
 	router.HandleFunc("/api/addTravel", AddTravel).Methods("POST")
+	router.HandleFunc("/api/travels", UpdateTravels).Methods("PUT")
+	router.HandleFunc("/api/travelsByDestination/{id:[0-9]+}", GetTravelsByDestination).Methods("GET")
+	router.HandleFunc("/api/travel/{id:[0-9]+}", FindTravel).Methods("GET")
+
 
 
 	l := log.New(os.Stdout, "destination-api ", log.LstdFlags)
@@ -70,6 +76,41 @@ func main() {
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	s.Shutdown(ctx)
 }
+func GetTravels(rw http.ResponseWriter, r *http.Request) {
+
+
+	lm := data_model.GetTravels()
+
+	err := lm.ToJSON(rw)
+	if err != nil {
+		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
+	}
+}
+func FindTravel(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+
+	var travel *data_model.Travel
+	travel, err = data_model.FindTravel(id)
+	if err == data_model.ErrTravelNotFound {
+		http.Error(rw, "Destination not found", http.StatusNotFound)
+		return
+	}
+
+	if err != nil {
+		http.Error(rw, "Destination not found", http.StatusInternalServerError)
+		return
+	}
+
+	errr := travel.ToJSON(rw)
+	if errr != nil {
+		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
+	}
+}
 
 func AddTravel(rw http.ResponseWriter, r *http.Request) {
 
@@ -77,3 +118,29 @@ func AddTravel(rw http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&travel)
 	data_model.AddTravel(&travel)
 }
+func UpdateTravels(rw http.ResponseWriter, r *http.Request) {
+
+	dest := data_model.Destination{}
+	dest.FromJSON(r.Body)
+
+	data_model.UpdateTravels(&dest)
+}
+func  GetTravelsByDestination(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+
+
+	var travels data_model.Travels
+	travels = data_model.GetTravelsByDestination(id)
+
+	errr := travels.ToJSON(rw)
+	if errr != nil {
+		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
+	}
+}
+
+

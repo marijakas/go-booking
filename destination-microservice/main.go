@@ -69,7 +69,7 @@ func main(){
 	router.HandleFunc("/api/destinations", GetDestinations).Methods("GET")
 	router.HandleFunc("/api/destination/{id:[0-9]+}", GetOneDestination).Methods("GET")
 	router.HandleFunc("/api/addDestination", AddDestination).Methods("POST")
-
+	router.HandleFunc("/api/updateDestination/{id:[0-9]+}", UpdateDestination).Methods("PUT")
 
 
 
@@ -106,7 +106,7 @@ func main(){
 func GetDestinations(rw http.ResponseWriter, r *http.Request) {
 
 
-	lm := data_model.GetDestionations()
+	lm := data_model.GetDestinations()
 
 	err := lm.ToJSON(rw)
 	if err != nil {
@@ -144,5 +144,35 @@ func GetOneDestination(rw http.ResponseWriter, r *http.Request) {
 	errr := destination.ToJSON(rw)
 	if errr != nil {
 		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
+	}
+}
+
+func UpdateDestination(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+
+
+
+	var destination data_model.Destination
+	json.NewDecoder(r.Body).Decode(&destination)
+
+	//authHeader := r.Header.Get("Authorization")
+	//splitToken := strings.Split(authHeader, "Bearer ")
+	//reqToken := splitToken[1]
+
+	err = data_model.UpdateDestination(id, &destination)
+
+	if err == data_model.ErrDestinationNotFound {
+		http.Error(rw, "Destination not found", http.StatusNotFound)
+		return
+	}
+
+	if err != nil {
+		http.Error(rw, "Destination not found", http.StatusInternalServerError)
+		return
 	}
 }

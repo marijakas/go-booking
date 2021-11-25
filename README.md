@@ -30,6 +30,10 @@ Flask servis koji omogućava registraciju i prijavu korisnika kao i dodavanje no
 
 Go servis koji omogućuje dodavanje, izmenu i brisanje konkretnih turističkih destinacija.
 
+<h3>Mikroservis za putovanja</h3>
+
+Go servis koji omogućuje dodavanje, izmenu i brisanje putovanja vezanih za turisticku destinaciju.
+
 <h3>Mikroservis za ocene i komentare</h3>
 
 Go servis za ocenjivanje i komentarisanje destinacija od strane registrovanih korisnika, kao i brisanje komentara.
@@ -41,5 +45,9 @@ Go servis koji omogućuje registrovanim korisnicima da rezervišu putovanja i ot
 <h3>Mikroservis za analitiku</h3>
 
 Pharo servis koji omogućuje prikaz izveštaja navedenih u okviru funkcionalnosti administratora sistema.
+
+<h3>Angular client</h3>
+
+Omogućava pristup svim funkcionalnostima sistema.
 
 

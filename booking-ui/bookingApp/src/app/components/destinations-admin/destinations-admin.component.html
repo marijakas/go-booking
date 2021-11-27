@@ -1,0 +1,22 @@
+<h1 style="font-family:'cursive'; font-size:45px">~Destinations~</h1>
+
+<div *ngIf="!destinations.length">
+    <p>No destinations to display.</p>
+</div>
+<div> 
+<div class="wrapper destination">
+     
+        <div *ngFor = "let destination of destinations">
+            <mat-grid-list cols="2" >
+                <app-destination-item [destination]="destination" class="page destination"></app-destination-item>
+
+            </mat-grid-list>
+        <mat-divider class="divider" role="separator"></mat-divider>
+       
+         
+        
+    </div>
+</div>
+
+    
+</div>

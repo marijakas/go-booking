@@ -5,7 +5,8 @@ import (
 	"encoding/json"
  	"fmt"
 	"github.com/go-playground/validator/v10"
- 	"github.com/jinzhu/gorm"
+	"github.com/golang-jwt/jwt"
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"io"
 	"log"
@@ -61,7 +62,7 @@ var err error
 
 
 var ErrDestinationNotFound = fmt.Errorf("Destination not found")
-func GetRate(id int) (*Rate, error) {
+func GetRate(id int, token string) (*Rate, error) {
 	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
@@ -84,35 +85,35 @@ func GetRate(id int) (*Rate, error) {
 		return nil, ErrDestinationNotFound
 	}
 
-	//claims := jwt.MapClaims{}
-	//jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
-	//	return []byte("UUSRHZPjPVgcIyWyGVGPp5Rj6pFaVgSg"), nil
-	//})
+	claims := jwt.MapClaims{}
+	jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
+		return []byte("123456asdf"), nil
+	})
 
-	//sub := claims["sub"].(map[string]interface{})
-	//userID := sub["id"].(float64)
-	//userIDint := int(userID)
+	sub := claims["sub"].(map[string]interface{})
+	userID := sub["id"].(float64)
+	userIDint := int(userID)
 
 	var rate Rate
-	db.Where(&Rate{DestinationID: id, UserID: 1}).Find(&rate)
+	db.Where(&Rate{DestinationID: id, UserID: userIDint}).Find(&rate)
 
 	return &rate, nil
 }
 
 
-func AddRate(r *Rate) (*Destination, error) {
+func AddRate(r *Rate, token string) (*Destination, error) {
 	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
-	//var bearer = "Bearer " + token
+	var bearer = "Bearer " + token
 	req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(r.DestinationID), nil)
 
-	//req.Header.Add("Authorization", bearer)
+	req.Header.Add("Authorization", bearer)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -126,25 +127,25 @@ func AddRate(r *Rate) (*Destination, error) {
 		return nil, ErrDestinationNotFound
 	}
 
-	//claims := jwt.MapClaims{}
-	//jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
-	//	return []byte("UUSRHZPjPVgcIyWyGVGPp5Rj6pFaVgSg"), nil
-	//})
+	claims := jwt.MapClaims{}
+	jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
+		return []byte("123456asdf"), nil
+	})
 
-	//sub := claims["sub"].(map[string]interface{})
-	//id := sub["id"].(float64)
-	//
-	//r.UserID = int(id)
+	sub := claims["sub"].(map[string]interface{})
+	id := sub["id"].(float64)
 
-	//var rate Rate
-	//result := db.Where(&Rate{DestinationID: r.DestinationID, UserID: 1}).Find(&rate)
+	r.UserID = int(id)
+
+	var rate Rate
+	result := db.Where(&Rate{DestinationID: r.DestinationID, UserID: int(id)}).Find(&rate)
 	db.Create(r)
-	//if result.RowsAffected == 0 {
-	//	db.Create(r)
-	//} else {
-	//	rate.Value = r.Value
-	//	db.Save(rate)
-	//}
+	if result.RowsAffected == 0 {
+		db.Create(r)
+	} else {
+		rate.Value = r.Value
+		db.Save(rate)
+	}
 
 	var rates []Rate
 	db.Where(&Rate{DestinationID: r.DestinationID}).Find(&rates)
@@ -161,7 +162,7 @@ func AddRate(r *Rate) (*Destination, error) {
 	jsonValue, _ := json.Marshal(dest)
 	putReq, err := http.NewRequest("PUT", "http://localhost:9090/api/updateDestination/" + strconv.Itoa(r.DestinationID), bytes.NewBuffer(jsonValue))
 
-	//putReq.Header.Add("Authorization", bearer)
+	putReq.Header.Add("Authorization", bearer)
 
 	client = &http.Client{}
 	resp, err = client.Do(putReq)

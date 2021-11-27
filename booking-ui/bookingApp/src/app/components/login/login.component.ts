@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             data => {
                 // this.router.navigate([this.returnUrl]);
                 
-                location.replace("http://localhost:4200/home");
+                location.replace("http://localhost:4200/homePageAdmin");
             },
             error => {
               this.openSnackBarSE();

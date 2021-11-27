@@ -16,8 +16,7 @@ export class AddAdminComponent implements OnInit {
   public username: string='';
   public password: string='';
   wasFormChanged = false;
-  public 
-  public breakpoint: number; // Breakpoint observer cod
+   public breakpoint: number; // Breakpoint observer cod
 
   constructor(private fb: FormBuilder,
     public dialog: MatDialog, private service: AddUserService) { }

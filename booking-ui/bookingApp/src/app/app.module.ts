@@ -20,7 +20,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-@NgModule({
+import { DestinationsAdminComponent } from './components/destinations-admin/destinations-admin.component';
+import { DestinationItemComponent } from './components/destination-item/destination-item.component';
+import { DeleteDestinationComponent } from './components/delete-destination/delete-destination.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AddDestinationComponent } from './components/add-destination/add-destination.component';
+import { MaterialElevationDirective } from './components/material-elevtion.directive';
+
+ @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
@@ -28,8 +37,13 @@ import {MatSelectModule} from '@angular/material/select';
     RegistrationComponent,
     HomePageAdminComponent,
     AddAdminComponent,
-    AddGuideComponent
-  ],
+    AddGuideComponent,
+    DestinationsAdminComponent,
+    DestinationItemComponent,
+    DeleteDestinationComponent,
+    AddDestinationComponent,
+    MaterialElevationDirective
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,7 +58,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatCardModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

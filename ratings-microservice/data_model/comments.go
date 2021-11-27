@@ -2,8 +2,10 @@ package data_model
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/go-playground/validator/v10"
+	"github.com/golang-jwt/jwt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"io"
@@ -13,7 +15,8 @@ import (
 )
 
 type Comment struct {
-	ID          int     `json:"id"`
+	gorm.Model
+
 	DestinationID     int 	`json:"destination_id" validate:"required"`
 	UserID     	int 	`json:"user_id""`
 	Username    string  `json:"username"`
@@ -47,7 +50,7 @@ func GetComments(id int) (Comments, error) {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
@@ -72,19 +75,19 @@ func GetComments(id int) (Comments, error) {
 }
 
 
-func AddComment(c *Comment) (*Comment, error) {
+func AddComment(c *Comment, token string) (*Comment, error) {
 	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
-	//var bearer = "Bearer " + token
+	var bearer = "Bearer " + token
 	req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(c.DestinationID), nil)
 
-	//req.Header.Add("Authorization", bearer)
+	req.Header.Add("Authorization", bearer)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -98,24 +101,75 @@ func AddComment(c *Comment) (*Comment, error) {
 		return nil, ErrDestinationNotFound
 	}
 
-	//claims := jwt.MapClaims{}
-	//jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
-	//	return []byte("UUSRHZPjPVgcIyWyGVGPp5Rj6pFaVgSg"), nil
-	//})
+	claims := jwt.MapClaims{}
+	jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
+		return []byte("123456asdf"), nil
+	})
 
-	//sub := claims["sub"].(map[string]interface{})
-	//id := sub["id"].(float64)
-	//username := sub["username"].(string)
+	sub := claims["sub"].(map[string]interface{})
+	id := sub["id"].(float64)
+	username := sub["username"].(string)
 
-	//c.UserID = int(id)
-	//c.Username = username
+	c.UserID = int(id)
+	c.Username = username
 
-	c.UserID = 2
-	c.Username = "username"
+	c.UserID = int(id)
+	c.Username = username
 	db.Create(c)
 
 	return c, nil
 }
+var ErrCommentNotFound = fmt.Errorf("Comment not found")
+var ErrCommentCannotBeDeleted = fmt.Errorf("Comment cannot be deleted")
 
+func GetComment(id int) (*Comment, error) {
+	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	if err != nil{
+		log.Fatal(err)
+	}else{
+		fmt.Println("Successfully connected to database!")
+	}
+	defer db.Close()
 
+	var comment Comment
+	result := db.First(&comment, id)
+
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) || result.RowsAffected == 0 {
+		return nil, ErrCommentNotFound
+	}
+
+	return &comment, nil
+}
+
+func DeleteComment(id int, token string) error {
+	comment, err := GetComment(id)
+	if err == ErrCommentNotFound {
+		return err
+	}
+
+	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	if err != nil{
+		log.Fatal(err)
+	}else{
+		fmt.Println("Successfully connected to database!")
+	}
+	defer db.Close()
+
+	claims := jwt.MapClaims{}
+	jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
+		return []byte("123456asdf"), nil
+	})
+
+	sub := claims["sub"].(map[string]interface{})
+	userID := sub["id"].(float64)
+	userIDint := int(userID)
+
+	if userIDint != comment.UserID {
+		return ErrCommentCannotBeDeleted
+	}
+
+	db.Delete(comment)
+
+	return nil
+}
 

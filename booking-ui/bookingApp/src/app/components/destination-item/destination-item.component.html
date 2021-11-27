@@ -1,0 +1,28 @@
+ 
+<mat-card class="example-card" (click)="openDestination(destination.ID)"  matTooltip="Open to see travels" 
+appMaterialElevation>
+   <mat-card-header class="header"> 
+    
+     <mat-card-title>{{destination.name}}</mat-card-title>
+     <mat-card-subtitle>{{destination.country}}</mat-card-subtitle>
+      
+     
+       <button mat-icon-button color="primary" (click)="saveChanges(destination)" matTooltip="Edit destination">
+         <mat-icon>edit</mat-icon>
+       </button>
+       <button mat-icon-button color="warn" matTooltip="Delete destination" type="button" (click)="openDeleteDest(destination)">
+         <mat-icon>delete</mat-icon>
+         
+       </button>
+      
+      
+   </mat-card-header>
+   <img mat-card-image class = "slika" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+   <mat-card-content class="sadrzaj">
+       <p>
+         {{destination.description}}
+       </p>
+     </mat-card-content>
+
+ </mat-card>
+ 

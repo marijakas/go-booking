@@ -14,6 +14,7 @@ import (
 	"os/signal"
 	"ratings-microservice/data_model"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -50,14 +51,7 @@ func main(){
 	router.HandleFunc("/api/addRating", AddRate).Methods("PUT")
 	router.HandleFunc("/api/addComment", AddComment).Methods("POST")
 	router.HandleFunc("/api/comments/{id:[0-9]+}", GetComments).Methods("GET")
-
-
-
-
-
-
-
-
+	router.HandleFunc("/api/deleteComment/{id:[0-9]+}", DeleteComment).Methods("DELETE")
 
 	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
 
@@ -95,11 +89,11 @@ func AddRate(rw http.ResponseWriter, r *http.Request) {
 	var rate data_model.Rate
 	json.NewDecoder(r.Body).Decode(&rate)
 
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer ")
-	//reqToken := splitToken[1]
+	authHeader := r.Header.Get("Authorization")
+	splitToken := strings.Split(authHeader, "Bearer ")
+	reqToken := splitToken[1]
 
-	dest, err := data_model.AddRate(&rate)
+	dest, err := data_model.AddRate(&rate, reqToken)
 
 	if err == data_model.ErrDestinationNotFound {
 		http.Error(rw, "Destination doesn't exists", http.StatusBadRequest)
@@ -125,11 +119,11 @@ func GetRating(rw http.ResponseWriter, r *http.Request) {
 		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
 		return
 	}
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer ")
-	//reqToken := splitToken[1]
+	authHeader := r.Header.Get("Authorization")
+	splitToken := strings.Split(authHeader, "Bearer ")
+	reqToken := splitToken[1]
 
-	rate, err := data_model.GetRate(destID)
+	rate, err := data_model.GetRate(destID, reqToken)
 	if err == data_model.ErrDestinationNotFound {
 		http.Error(rw, "Destination doesn't exists", http.StatusBadRequest)
 		return
@@ -169,11 +163,11 @@ func AddComment(rw http.ResponseWriter, r *http.Request) {
 	var comment data_model.Comment
 	json.NewDecoder(r.Body).Decode(&comment)
 
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer ")
-	//reqToken := splitToken[1]
+	authHeader := r.Header.Get("Authorization")
+	splitToken := strings.Split(authHeader, "Bearer ")
+	reqToken := splitToken[1]
 
-	commentForReturn, err := data_model.AddComment(&comment)
+	commentForReturn, err := data_model.AddComment(&comment, reqToken)
 
 	if err == data_model.ErrDestinationNotFound {
 		http.Error(rw, "Destination doesn't exists", http.StatusBadRequest)
@@ -191,3 +185,30 @@ func AddComment(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+
+
+func DeleteComment(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+
+
+
+	authHeader := r.Header.Get("Authorization")
+	splitToken := strings.Split(authHeader, "Bearer ")
+	reqToken := splitToken[1]
+
+	err = data_model.DeleteComment(id, reqToken)
+	if err == data_model.ErrCommentCannotBeDeleted {
+		http.Error(rw, "You can't delete someone else's comment", http.StatusBadRequest)
+		return
+	}
+
+	if err == data_model.ErrCommentNotFound {
+		http.Error(rw, "Comment not found", http.StatusBadRequest)
+		return
+	}
+}

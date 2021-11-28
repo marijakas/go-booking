@@ -28,6 +28,10 @@ import {MatCardModule} from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddDestinationComponent } from './components/add-destination/add-destination.component';
 import { MaterialElevationDirective } from './components/material-elevtion.directive';
+import { DestinationComponent } from './components/destination/destination.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { AddTravelComponent } from './components/add-travel/add-travel.component';
 
  @NgModule({
   declarations: [
@@ -42,7 +46,9 @@ import { MaterialElevationDirective } from './components/material-elevtion.direc
     DestinationItemComponent,
     DeleteDestinationComponent,
     AddDestinationComponent,
-    MaterialElevationDirective
+    MaterialElevationDirective,
+    DestinationComponent,
+    AddTravelComponent
    ],
   imports: [
     BrowserModule,
@@ -62,6 +68,9 @@ import { MaterialElevationDirective } from './components/material-elevtion.direc
     MatDividerModule,
     MatCardModule,
     MatTooltipModule,
+    MatTableModule,
+    MatPaginatorModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,25 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ca3f12cc-82dd-4d67-9533-ac14e141532a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-admin/add-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-admin/add-admin.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-admin/add-admin.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-admin/add-admin.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-admin/add-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-admin/add-admin.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-guide/add-guide.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-guide/add-guide.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-guide/add-guide.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/add-guide/add-guide.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home/home.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home/home.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../destination-microservice/data_model/destinations.go" beforeDir="false" afterPath="$PROJECT_DIR$/../destination-microservice/data_model/destinations.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../destination-microservice/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../destination-microservice/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/data_model/comments.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/data_model/comments.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/data_model/ratings.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/data_model/ratings.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

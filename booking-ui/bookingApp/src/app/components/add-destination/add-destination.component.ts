@@ -33,9 +33,9 @@ export class AddDestinationComponent implements OnInit {
   public onAddCus(): void {
     let dest = new Destination();
      
-    dest.Name = this.addCusForm.get('name').value;
-    dest.Country = this.addCusForm.get('country').value;
-    dest.Description= this.addCusForm.get('description').value;
+    dest.name = this.addCusForm.get('name').value;
+    dest.country = this.addCusForm.get('country').value;
+    dest.description= this.addCusForm.get('description').value;
      this.service.addDestination(dest);
      this.dialog.closeAll();
      

@@ -132,7 +132,7 @@ func AddTravel(t *Travel) error {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
@@ -142,7 +142,7 @@ func AddTravel(t *Travel) error {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer resp.Body.Close()
 
@@ -162,7 +162,7 @@ func UpdateTravels(d *Destination) error {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 

@@ -46,8 +46,15 @@ export class LoginComponent implements OnInit {
         .subscribe(
             data => {
                 // this.router.navigate([this.returnUrl]);
+                if(localStorage.getItem("role")==='ROLE_ADMIN'){
+                  location.replace("http://localhost:4200/homePageAdmin");
+
+                }
                 
-                location.replace("http://localhost:4200/homePageAdmin");
+                else{
+                  location.replace("http://localhost:4200/homePageUser");
+
+                }
             },
             error => {
               this.openSnackBarSE();

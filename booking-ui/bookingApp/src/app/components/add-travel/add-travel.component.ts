@@ -37,13 +37,15 @@ export class AddTravelComponent implements OnInit {
     
     
     this.trvl.name = this.addCusForm.get('name').value;
-    this.trvl.price = this.addCusForm.get('price').value;
+    this.trvl.price = Number(this.addCusForm.get('price').value);
     this.trvl.description= this.addCusForm.get('description').value;
-    this.trvl.destination_id = this.data.dataKey;
+    this.trvl.destination_id = Number(this.data.dataKey);
     this.trvl.date_time = '12122020'
     this.trvl.free_seats = 50;
+
+    console.log('travel - ', this.trvl)
     this.service.addTravel(this.trvl);
-     this.dialog.closeAll();
+    this.dialog.closeAll();
      
      
    }

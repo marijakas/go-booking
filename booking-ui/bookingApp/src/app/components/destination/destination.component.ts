@@ -67,6 +67,10 @@ export class DestinationComponent implements OnInit {
     this.authservice.logout();
     location.replace("http://localhost:4200/home");
   }
+  deleteTravel(u:Travel):void{
+    console.log(u)
+    this.service.deleteTravel(u.ID);
+  }
 
   openDialogTravel(): void {
     const dialogRef = this.dialog.open(AddTravelComponent, {

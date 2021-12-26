@@ -62,17 +62,39 @@ export class DestinationService {
     return this.http.get<Travel[]>("http://localhost:9091/api/travelsByDestination/" + id);
   
    }
-
+   deleteTravel(trvlId: number) {
+    return this.http.delete('http://localhost:9091/api/delete/' + trvlId, {
+        headers: this.headers,
+      })
+      .subscribe(
+        (val) => {
+          console.log('PUT call successful value returned in body', val);
+          this.openSnackBar();
+          window.location.reload();
+        },
+        (response) => {
+          console.log('PUT call in error', response);
+          this.openSnackBarErr();
+        },
+        () => {
+          console.log('The PUT observable is now completed.');
+        }
+      );
+  }
   getDestById(id):Observable<Destination>{
     return this.http.get<Destination>("http://localhost:9090/api/destination/"+ id)
   }
 
   openSnackBar() {
-    this._snackBar.open('Successfully registered new user.', 'OK', {
+    this._snackBar.open('Operation is successfull', 'OK', {
       duration: 2000,
     });
   }
-
+  openSnackBarErr() {
+    this._snackBar.open('Error occured!', 'OK', {
+      duration: 2000,
+    });
+  }
 
   addTravel(travel:Travel){
     const body = JSON.stringify(travel);

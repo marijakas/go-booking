@@ -32,6 +32,7 @@ import { DestinationComponent } from './components/destination/destination.compo
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AddTravelComponent } from './components/add-travel/add-travel.component';
+import { HomePageUserComponent } from './components/home-page-user/home-page-user.component';
 
  @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AddTravelComponent } from './components/add-travel/add-travel.component
     AddDestinationComponent,
     MaterialElevationDirective,
     DestinationComponent,
-    AddTravelComponent
+    AddTravelComponent,
+    HomePageUserComponent
    ],
   imports: [
     BrowserModule,

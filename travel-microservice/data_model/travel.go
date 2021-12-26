@@ -72,7 +72,7 @@ func GetTravels() Travels {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
@@ -112,7 +112,7 @@ func GetTravelsByDestination(id int) Travels {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
@@ -173,6 +173,53 @@ func UpdateTravels(d *Destination) error {
 		p.DestinationName = d.Name
 		db.Save(p)
 	}
+
+	return nil
+}
+
+
+var ErrTravelCannotBeDeleted = fmt.Errorf("Travel cannot be deleted")
+func DeleteTravel(id int) error {
+	destination, err := FindTravel(id)
+	if err != nil {
+		return err
+	}
+
+
+	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	if err != nil{
+		log.Fatal(err)
+	}else{
+		fmt.Println("Successfully connected to database!")
+	}
+	defer db.Close()
+
+	////var bearer = "Bearer " + token
+	//req, err := http.NewRequest("GET", "http://localhost:9091/api/travelsByDestination/" + strconv.Itoa(id), nil)
+	//////req.Header.Add("Authorization", bearer)
+	////
+	//client := &http.Client{}
+	//resp, err := client.Do(req)
+	//if err != nil {
+	//
+	//	return err
+	//}
+	//defer resp.Body.Close()
+	//
+	//var travels Travels
+	//
+	//if err := json.NewDecoder(resp.Body).Decode(&travels); err != nil {
+	//
+	//	return err
+	//}
+	//
+	//
+	//if len(travels) != 0 {
+	//
+	//	return ErrDestinationCannotBeDeleted
+	//}
+
+	db.Delete(destination)
 
 	return nil
 }

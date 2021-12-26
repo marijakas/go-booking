@@ -28,6 +28,8 @@ export class UserService {
             if (userTokenState.token) {
                 localStorage.setItem('token', userTokenState.token);
                 localStorage.setItem('username', username);
+                localStorage.setItem('role',userTokenState.user.role )
+                console.log(userTokenState.user.role + 'USERTOKST')
                 console.log(userTokenState.token)
             }
             else{

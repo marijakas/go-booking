@@ -42,7 +42,7 @@ func main() {
 	router.HandleFunc("/api/travels", UpdateTravels).Methods("PUT")
 	router.HandleFunc("/api/travelsByDestination/{id:[0-9]+}", GetTravelsByDestination).Methods("GET")
 	router.HandleFunc("/api/travel/{id:[0-9]+}", FindTravel).Methods("GET")
-
+	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteTravel).Methods("DELETE")
 
 
 	l := log.New(os.Stdout, "destination-api ", log.LstdFlags)
@@ -141,6 +141,26 @@ func  GetTravelsByDestination(rw http.ResponseWriter, r *http.Request) {
 	if errr != nil {
 		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
 	}
+}
+func  DeleteTravel(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+	//authHeader := r.Header.Get("Authorization")
+	//splitToken := strings.Split(authHeader, "Bearer ")
+	//reqToken := splitToken[1]
+
+
+	err = data_model.DeleteTravel(id)
+
+	if err == data_model.ErrTravelCannotBeDeleted {
+		http.Error(rw, "Travel not found", http.StatusNotFound)
+		return
+	}
+
 }
 
 

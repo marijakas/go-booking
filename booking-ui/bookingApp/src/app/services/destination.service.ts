@@ -13,6 +13,7 @@ export class DestinationService {
   bear  = localStorage.getItem("token");
     
   headers: HttpHeaders = new HttpHeaders({"Authorization": "Bearer " + this.bear, 'content-type': 'application/json'})
+  headers2: HttpHeaders = new HttpHeaders({'content-type': 'application/json'})
   getDestinations(): Observable<Destination[]> {
     return this.http.get<Destination[]>(
       'http://localhost:9090/api/destinations'
@@ -63,9 +64,7 @@ export class DestinationService {
   
    }
    deleteTravel(trvlId: number) {
-    return this.http.delete('http://localhost:9091/api/delete/' + trvlId, {
-        headers: this.headers,
-      })
+    return this.http.delete('http://localhost:9091/api/delete/' + trvlId, {headers: this.headers2})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);

@@ -47,8 +47,10 @@ export class DestinationComponent implements OnInit {
 
     this.service.getTravels(id).subscribe((data: any) => {
       let trav: Travel;
+      console.log("putovanja su ", data)
       data.forEach(obj => {
         trav = new Travel();
+        trav.ID = obj.ID;
         trav.name = obj.name;
         trav.price = obj.price;
         trav.description = obj.description;

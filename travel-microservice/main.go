@@ -143,6 +143,9 @@ func  GetTravelsByDestination(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 func  DeleteTravel(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Access-Control-Allow-Origin", "*")
+
+	rw.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {

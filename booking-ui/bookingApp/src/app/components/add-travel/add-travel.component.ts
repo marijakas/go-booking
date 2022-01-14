@@ -15,7 +15,9 @@ export class AddTravelComponent implements OnInit {
   public name: string='';
   public description: string='';
   public price: string='';
+  public free_seats: string='';
   public trvl = new Travel();
+  public date_time:string='';
   wasFormChanged = false;
   public breakpoint: number; // Breakpoint observer cod
 
@@ -28,6 +30,8 @@ export class AddTravelComponent implements OnInit {
       name: [this.name, [Validators.required]],
       price: [this.price, [Validators.required]],
       description: [this.description, [Validators.required]],
+     free_seats: [this.free_seats, [Validators.required]],
+     date_time: [this.date_time, [Validators.required]],
     });
     this.breakpoint = window.innerWidth <= 600 ? 1 : 2; 
     
@@ -40,8 +44,8 @@ export class AddTravelComponent implements OnInit {
     this.trvl.price = Number(this.addCusForm.get('price').value);
     this.trvl.description= this.addCusForm.get('description').value;
     this.trvl.destination_id = Number(this.data.dataKey);
-    this.trvl.date_time = '12122020'
-    this.trvl.free_seats = 50;
+    this.trvl.date_time = this.addCusForm.get('date_time').value;
+    this.trvl.free_seats = Number(this.addCusForm.get('free_seats').value);
 
     console.log('travel - ', this.trvl)
     this.service.addTravel(this.trvl);
@@ -59,7 +63,7 @@ export class AddTravelComponent implements OnInit {
    }
  
    saveChangesEnabled() {
-     return this.addCusForm.value.name.length > 0 &&  this.addCusForm.value.price.length > 0 &&  this.addCusForm.value.description.length > 0;
+     return this.addCusForm.value.name.length > 0 &&  this.addCusForm.value.price.length > 0 &&  this.addCusForm.value.description.length > 0 &&  this.addCusForm.value.free_seats.length > 0;
    }
   
  

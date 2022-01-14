@@ -46,8 +46,32 @@
                 </div>
             </mat-grid-tile>  
              
-       
-           
+            <mat-grid-tile >
+              <div>
+                  <mat-form-field>
+                      <input matInput placeholder="Free seats" value={{free_seats}} formControlName="free_seats" name="free_seats"  required>
+                      <mat-error *ngIf="addCusForm.controls.free_seats.hasError('required')" name="nameReq">
+                      Please number of free seats
+                      </mat-error>
+                  
+                  </mat-form-field>
+              </div>
+          </mat-grid-tile>  
+          <!-- <mat-grid-tile >
+            <div>
+                <mat-form-field>
+                     <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"
+                     input-aria-describedby="datepicker-description"
+                      value={{date_time}} formControlName="date_time" name="date_time"  required
+                     input-aria-labelledby="datepicker-header "></md-datepicker>
+                    
+                    <mat-error *ngIf="addCusForm.controls.date_time.hasError('required')" name="nameReq">
+                    Please enter date of this trip
+                    </mat-error>
+                
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>   -->
 
     </mat-grid-list>
         <div class="btn-sec">

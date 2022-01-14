@@ -34,7 +34,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AddTravelComponent } from './components/add-travel/add-travel.component';
 import { HomePageUserComponent } from './components/home-page-user/home-page-user.component';
 import { EditTravelComponent } from './components/edit-travel/edit-travel.component';
- 
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
  @NgModule({
   declarations: [
@@ -75,6 +75,7 @@ import { EditTravelComponent } from './components/edit-travel/edit-travel.compon
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDatepickerModule,
     
   ],
   providers: [],

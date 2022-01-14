@@ -30,6 +30,7 @@
             <th class= "sredina">Price</th>
             <th class= "sredina">Date</th>
             <th class= "sredina">Description</th>
+            <th class= "sredina">Free seats</th>
             <th class= "sredina" colspan="2"> 
                  <button mat-icon-button color="primary"  matTooltip="Add travel" (click) = "openDialogTravel()">
                 <mat-icon>add</mat-icon>
@@ -44,6 +45,7 @@
             <td>{{u.price}}</td>
             <td>{{u.date_time}}</td>
             <td>{{u.description}}</td> 
+            <td>{{u.free_seats}}</td> 
             <td>
                 <button mat-icon-button color="primary"  matTooltip="Edit" (click) = "editTravel(u)">
                     <mat-icon>edit</mat-icon>

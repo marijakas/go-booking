@@ -40,7 +40,7 @@ var (
 
 func main(){
 
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 
 	//oppening connection to database
 	if err != nil{

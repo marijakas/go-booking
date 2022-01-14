@@ -76,7 +76,7 @@ var err error
 
 
 func AddReservation(t *Reservation) error {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5436 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -107,7 +107,7 @@ func AddReservation(t *Reservation) error {
 
 
 func GetReservations() Reservations {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5436 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -127,7 +127,7 @@ func GetReservations() Reservations {
 }
 
 func GetReservationsByUser(id int) Reservations {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5436 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -155,7 +155,7 @@ func DeleteReservation(id int) error {
 		return ErrReservationNotFound
 	}
 
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5436 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
 	 if err != nil{
 		 log.Fatal(err)
 	 }else{
@@ -168,7 +168,7 @@ func DeleteReservation(id int) error {
 	return nil
 }
 func FindReservation(id int) (*Reservation, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5436 user=postgres dbname=go_booking_reservations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{

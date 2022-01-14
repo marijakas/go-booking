@@ -59,7 +59,7 @@ var err error
 var ErrDestinationNotFound = fmt.Errorf("Destination not found")
 
 func FindDestination(id int) (*Destination, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -82,7 +82,7 @@ func UpdateDestinationAverageRate(id int, average float32) error {
 		return err
 	}
 
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -97,7 +97,7 @@ func UpdateDestinationAverageRate(id int, average float32) error {
 	return nil
 }
 func GetDestinations() Destionations {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -116,7 +116,7 @@ func GetDestinations() Destionations {
 	return forReturn
 }
 func AddDestination(d *Destination) {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -133,7 +133,7 @@ func UpdateDestination(id int, d *Destination) error {
 		return err
 	}
 
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil {
 		panic("failed to connect database")
 	}
@@ -175,7 +175,7 @@ func DeleteDestination(id int) error {
 	}
 
 	print(destination.Name)
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{

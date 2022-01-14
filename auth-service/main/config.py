@@ -9,7 +9,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:12345@localhost:5432/go-booking-users'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:12345@localhost:5433/go-booking-users'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     MAIL_SERVER = 'smtp.gmail.com'

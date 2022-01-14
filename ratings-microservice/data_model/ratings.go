@@ -63,7 +63,7 @@ var err error
 
 var ErrDestinationNotFound = fmt.Errorf("Destination not found")
 func GetRate(id int, token string) (*Rate, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5435 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -102,7 +102,7 @@ func GetRate(id int, token string) (*Rate, error) {
 
 
 func AddRate(r *Rate, token string) (*Destination, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=localhost port=5435 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{

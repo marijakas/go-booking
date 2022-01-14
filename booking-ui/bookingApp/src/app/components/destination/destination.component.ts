@@ -9,6 +9,7 @@ import { Travel } from 'src/app/models/Travel';
 import { DestinationService } from 'src/app/services/destination.service';
 import { UserService } from 'src/app/services/user.service';
 import { AddTravelComponent } from '../add-travel/add-travel.component';
+import { EditTravelComponent } from '../edit-travel/edit-travel.component';
 
 @Component({
   selector: 'app-destination',
@@ -73,7 +74,14 @@ export class DestinationComponent implements OnInit {
     console.log(u)
     this.service.deleteTravel(u.ID);
   }
-
+  editTravel(u:Travel):void{
+    const dialogRef = this.dialog.open(EditTravelComponent, {
+      width: '640px', disableClose: true, data: {
+        dataKey: u
+      }
+    });
+    
+  }
   openDialogTravel(): void {
     const dialogRef = this.dialog.open(AddTravelComponent, {
       width: '640px', disableClose: true, data: {

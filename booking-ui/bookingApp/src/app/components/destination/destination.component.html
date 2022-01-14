@@ -45,7 +45,7 @@
             <td>{{u.date_time}}</td>
             <td>{{u.description}}</td> 
             <td>
-                <button mat-icon-button color="primary"  matTooltip="Edit">
+                <button mat-icon-button color="primary"  matTooltip="Edit" (click) = "editTravel(u)">
                     <mat-icon>edit</mat-icon>
                   </button>
                   <button mat-icon-button color="warn" matTooltip="Delete" type="button" (click) = "deleteTravel(u)">

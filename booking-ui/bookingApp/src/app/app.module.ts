@@ -33,6 +33,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AddTravelComponent } from './components/add-travel/add-travel.component';
 import { HomePageUserComponent } from './components/home-page-user/home-page-user.component';
+import { EditTravelComponent } from './components/edit-travel/edit-travel.component';
+ 
 
  @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { HomePageUserComponent } from './components/home-page-user/home-page-use
     MaterialElevationDirective,
     DestinationComponent,
     AddTravelComponent,
-    HomePageUserComponent
+    HomePageUserComponent,
+    EditTravelComponent
    ],
   imports: [
     BrowserModule,

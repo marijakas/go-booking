@@ -1,0 +1,55 @@
+<div class="bg">
+    <header class="nav">
+        <div class="container">
+            <a id="home" class="nav" routerLink="/home" class="logo">GO Booking</a>
+            <nav>
+                <ul>
+            
+                    <li><a href="#" class="nsav" onclick="return false;" name="addAdmin" (click)="logOut()">Log out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <br>
+    <div><h1>
+        {{destination.name}}
+         
+    </h1>
+    <h3>
+        {{destination.country}}
+    </h3> </div>
+      
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<table class="table table-bordered table-hover">
+    <thead> 
+        <tr class="text-center">
+            <th class= "sredina">Name</th>
+            <th class= "sredina">Price</th>
+            <th class= "sredina">Date</th>
+            <th class= "sredina">Description</th>
+            <th class= "sredina">Free seats</th>
+            <th class="sredina">Add reservation</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center" *ngFor="let u of travels">
+            <td>{{u.name}}</td>
+             
+            <td>{{u.price}}</td>
+            <td>{{u.date_time}}</td>
+            <td>{{u.description}}</td> 
+            <td>{{u.free_seats}}</td> 
+            <td>
+                <button mat-icon-button color="primary"  matTooltip="Add reservation" (click) = "addReservation(u)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                  
+            </td>   
+        </tr>
+    </tbody>
+</table>
+
+</div>

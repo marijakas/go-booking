@@ -48,7 +48,7 @@ export class AddTravelComponent implements OnInit {
     this.trvl.free_seats = Number(this.addCusForm.get('free_seats').value);
 
     console.log('travel - ', this.trvl)
-    this.service.addTravel(this.trvl);
+   // this.service.addTravel(this.trvl);
     this.dialog.closeAll();
      
      

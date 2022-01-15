@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-page-user',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service:UserService) { }
 
   ngOnInit(): void {
   }
-
+  logOut():void{
+    this.service.logout();
+    location.replace("http://localhost:4200/home");
+  }
+  
 }

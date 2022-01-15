@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { DestinationComponent } from './components/destination/destination.component';
 import { HomePageUserComponent } from './components/home-page-user/home-page-user.component';
+ import { DestinationUserComponent } from './components/destination-user/destination-user.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'homePageAdmin', component: HomePageAdminComponent },
   { path: 'homePageUser', component: HomePageUserComponent },
   { path: 'destination/:id', component: DestinationComponent }, // ovde treba da ide id jer ce se na osnovu njega dobaviti destinacija
+  { path: 'destinationUser/:id', component: DestinationUserComponent }, // ovde treba da ide id jer ce se na osnovu njega dobaviti destinacija
 
 ];
 

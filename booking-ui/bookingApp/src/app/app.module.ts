@@ -35,6 +35,10 @@ import { AddTravelComponent } from './components/add-travel/add-travel.component
 import { HomePageUserComponent } from './components/home-page-user/home-page-user.component';
 import { EditTravelComponent } from './components/edit-travel/edit-travel.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DestinationsUserComponent } from './components/destinations-user/destinations-user.component';
+import { DestinationItemUserComponent } from './components/destination-item-user/destination-item-user.component';
+import { DestinationUserComponent } from './components/destination-user/destination-user.component';
 
  @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     DestinationComponent,
     AddTravelComponent,
     HomePageUserComponent,
-    EditTravelComponent
+    EditTravelComponent,
+    DestinationsUserComponent,
+    DestinationItemUserComponent,
+    DestinationUserComponent
    ],
   imports: [
     BrowserModule,
@@ -76,6 +83,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatTableModule,
     MatPaginatorModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     
   ],
   providers: [],

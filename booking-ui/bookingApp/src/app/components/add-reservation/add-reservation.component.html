@@ -1,0 +1,39 @@
+<div>
+   
+    <div class="add-title">
+        <button mat-button class="close-icon" [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button> 
+      <h2 class="primary">Add reservation for {{trvl.name}}</h2>
+    </div>
+    <div>
+      <form [formGroup]="addCusForm" (change)="formChanged()">
+        <mat-grid-list cols="1"   rowHeight="85px" (window:resize)="onResize($event)">
+
+            <mat-grid-tile >
+             <div>
+                <mat-form-field>
+                    <input matInput placeholder="Number of seats" value={{number_of_seats}} formControlName="number_of_seats" name="number_of_seats"  required>
+                    <mat-error *ngIf="addCusForm.controls.number_of_seats.hasError('required')" name="nameReq">
+                      Please enter number of seats
+                    </mat-error>
+                   
+                  </mat-form-field>
+             </div>
+            </mat-grid-tile>
+
+         
+ 
+            
+
+    </mat-grid-list>
+        <div class="btn-sec">
+          <button mat-raised-button type="submit" color="primary" class="Update-btn"  [disabled]="!saveChangesEnabled()" name="saveDest" (click)="onAddCus()" >Save</button>
+          <button mat-raised-button type="button" class="Discard-btn"  (click)="openDialog()" >Cancel</button>
+        </div>
+  
+      </form>
+  
+    </div>
+  </div>
+  

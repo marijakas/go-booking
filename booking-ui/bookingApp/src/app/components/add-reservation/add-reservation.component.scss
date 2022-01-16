@@ -1,0 +1,18 @@
+h2 {
+    text-align: center;
+  }
+
+
+  .close-icon{
+    justify-self: right;
+    font-size: 20px;
+    border: none;
+    height: 30px;
+    
+    outline: none;
+    color: #c04747;
+    
+    &:hover {
+        cursor: pointer;
+    }
+  }

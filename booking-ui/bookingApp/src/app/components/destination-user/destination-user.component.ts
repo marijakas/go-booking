@@ -5,6 +5,7 @@ import { Destination } from 'src/app/models/Destination';
 import { Travel } from 'src/app/models/Travel';
 import { DestinationService } from 'src/app/services/destination.service';
 import { UserService } from 'src/app/services/user.service';
+import { AddReservationComponent } from '../add-reservation/add-reservation.component';
 
 @Component({
   selector: 'app-destination-user',
@@ -63,9 +64,15 @@ export class DestinationUserComponent implements OnInit {
 
 
   }
+
+  
    
   addReservation(u:Travel):void{
-   console.log("ADD RES", u)
+    const dialogRef = this.dialog.open(AddReservationComponent, {
+      width: '640px', disableClose: true, data: {
+        dataKey: u
+      }
+    });
     
   }
   logOut(): void {

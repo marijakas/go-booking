@@ -9,6 +9,7 @@ import { Travel } from 'src/app/models/Travel';
 import { DestinationService } from 'src/app/services/destination.service';
 import { UserService } from 'src/app/services/user.service';
 import { AddTravelComponent } from '../add-travel/add-travel.component';
+import { DeleteDestinationComponent } from '../delete-destination/delete-destination.component';
 import { EditTravelComponent } from '../edit-travel/edit-travel.component';
 
 @Component({
@@ -71,9 +72,18 @@ export class DestinationComponent implements OnInit {
     this.authservice.logout();
     location.replace("http://localhost:4200/home");
   }
-  deleteTravel(u:Travel):void{
+  delete(u:Travel):void{
     console.log(u)
     this.service.deleteTravel(u.ID);
+  }
+  deleteTravel(u:Travel) {
+    const dialogRef = this.dialog.open(DeleteDestinationComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if (result){
+        this.delete(u);
+      }
+    });
   }
   editTravel(u:Travel):void{
     const dialogRef = this.dialog.open(EditTravelComponent, {

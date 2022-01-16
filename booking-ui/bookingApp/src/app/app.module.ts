@@ -39,6 +39,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { DestinationsUserComponent } from './components/destinations-user/destinations-user.component';
 import { DestinationItemUserComponent } from './components/destination-item-user/destination-item-user.component';
 import { DestinationUserComponent } from './components/destination-user/destination-user.component';
+import { AddReservationComponent } from './components/add-reservation/add-reservation.component';
+import { ReservationsUserComponent } from './components/reservations-user/reservations-user.component';
 
  @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { DestinationUserComponent } from './components/destination-user/destinat
     EditTravelComponent,
     DestinationsUserComponent,
     DestinationItemUserComponent,
-    DestinationUserComponent
+    DestinationUserComponent,
+    AddReservationComponent,
+    ReservationsUserComponent
    ],
   imports: [
     BrowserModule,

@@ -4,4 +4,6 @@ export class Reservation {
     user_id:number;
     reservation_date:number;
     number_of_seats:number;
+    travel_name:string;
+    sold:boolean;
 }

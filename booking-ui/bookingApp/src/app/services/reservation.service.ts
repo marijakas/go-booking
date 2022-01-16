@@ -10,8 +10,10 @@ import { Reservation } from '../models/Reservation';
 export class ReservationService {
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
-  headers2: HttpHeaders = new HttpHeaders({'content-type': 'application/json'})
   bear  = localStorage.getItem("token");
+  
+  headers: HttpHeaders = new HttpHeaders({"Authorization": "Bearer " + this.bear})
+  headers2: HttpHeaders = new HttpHeaders({'content-type': 'application/json'})
   openSnackBar() {
     this._snackBar.open('Operation is successfull', 'OK', {
       duration: 2000,

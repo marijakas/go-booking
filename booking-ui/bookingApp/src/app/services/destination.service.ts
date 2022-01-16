@@ -64,7 +64,7 @@ export class DestinationService {
   
    }
    deleteTravel(trvlId: number) {
-    return this.http.delete('http://localhost:9091/api/delete/' + trvlId, {headers: this.headers2})
+    return this.http.delete('http://localhost:9091/api/delete/' + trvlId, {headers: this.headers})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);
@@ -80,9 +80,16 @@ export class DestinationService {
         }
       );
   }
+
+  getAvgRating(id):Observable<Destination>{
+    return this.http.get<Destination>("http://localhost:9092/api/rating/"+ id)
+  }
+  
   getDestById(id):Observable<Destination>{
     return this.http.get<Destination>("http://localhost:9090/api/destination/"+ id)
   }
+
+
 
   openSnackBar() {
     this._snackBar.open('Operation is successfull', 'OK', {

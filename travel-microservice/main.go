@@ -13,6 +13,7 @@ import (
 	"os"
 	"os/signal"
 	"strconv"
+	"strings"
 	"time"
 	"travel-microservice/data_model"
 )
@@ -143,21 +144,19 @@ func  GetTravelsByDestination(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 func  DeleteTravel(rw http.ResponseWriter, r *http.Request) {
-	rw.Header().Set("Access-Control-Allow-Origin", "*")
 
-	rw.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
 		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
 		return
 	}
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer ")
-	//reqToken := splitToken[1]
+	authHeader := r.Header.Get("Authorization")
+	splitToken := strings.Split(authHeader, "Bearer ")
+	reqToken := splitToken[1]
 
 
-	err = data_model.DeleteTravel(id)
+	err = data_model.DeleteTravel(id, reqToken)
 
 	if err == data_model.ErrTravelCannotBeDeleted {
 		http.Error(rw, "Travel not found", http.StatusNotFound)

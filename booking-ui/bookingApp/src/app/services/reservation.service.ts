@@ -41,6 +41,13 @@ export class ReservationService {
 
     return this.http.get<Reservation[]>("http://localhost:9094/api/getReservationsByUser/" + id);
   
+
+   }
+
+   getReservationsAll():Observable<Reservation[]>{
+
+    return this.http.get<Reservation[]>("http://localhost:9094/api/getReservations");
+  
    }
    openSnackBarErr() {
     this._snackBar.open('Error occured!', 'OK', {

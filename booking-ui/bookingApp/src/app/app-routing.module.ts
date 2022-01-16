@@ -8,6 +8,7 @@ import { DestinationComponent } from './components/destination/destination.compo
 import { HomePageUserComponent } from './components/home-page-user/home-page-user.component';
  import { DestinationUserComponent } from './components/destination-user/destination-user.component';
 import { ReservationsUserComponent } from './components/reservations-user/reservations-user.component';
+import { ReservationsAllComponent } from './components/reservations-all/reservations-all.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'destination/:id', component: DestinationComponent }, // ovde treba da ide id jer ce se na osnovu njega dobaviti destinacija
   { path: 'destinationUser/:id', component: DestinationUserComponent }, // ovde treba da ide id jer ce se na osnovu njega dobaviti destinacija
   { path: 'reservationsUser', component: ReservationsUserComponent },
+  { path: 'reservationsAll', component: ReservationsAllComponent },
 ];
 
 @NgModule({

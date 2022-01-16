@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca3f12cc-82dd-4d67-9533-ac14e141532a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destination-user/destination-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destination-user/destination-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/home-page-admin/home-page-admin.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

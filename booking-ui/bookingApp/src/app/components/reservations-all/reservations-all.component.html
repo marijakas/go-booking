@@ -1,0 +1,46 @@
+<div class="bg">
+    <header class="nav">
+        <div class="container">
+            
+            <a id="home" matTooltip="Return to home page" class="nav" routerLink="/homePageAdmin" class="logo">GO Booking</a>
+            <nav>
+                <ul>
+            
+                  
+                    <li><a href="#" class="nsav" onclick="return false;" name="addAdmin" (click)="logOut()">Log out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <table class="table table-bordered table-hover">
+        <thead> 
+            <tr class="text-center">
+                <th class= "sredina">Travel</th>
+                <th class= "sredina">Number of seats</th>  
+                <th class="sredina"> </th>
+    
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let r of reservations">
+                <td>{{r.travel_name}}</td>
+                <td>{{r.number_of_seats}}</td>
+              
+                <td>
+                    <button mat-icon-button color="primary"  matTooltip="Cancel reservation" (click) = "cancelReservation(r)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      
+                </td>   
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+

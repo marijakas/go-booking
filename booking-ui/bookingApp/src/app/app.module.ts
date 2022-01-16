@@ -41,6 +41,7 @@ import { DestinationItemUserComponent } from './components/destination-item-user
 import { DestinationUserComponent } from './components/destination-user/destination-user.component';
 import { AddReservationComponent } from './components/add-reservation/add-reservation.component';
 import { ReservationsUserComponent } from './components/reservations-user/reservations-user.component';
+import { ReservationsAllComponent } from './components/reservations-all/reservations-all.component';
 
  @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ReservationsUserComponent } from './components/reservations-user/reserv
     DestinationItemUserComponent,
     DestinationUserComponent,
     AddReservationComponent,
-    ReservationsUserComponent
+    ReservationsUserComponent,
+    ReservationsAllComponent
    ],
   imports: [
     BrowserModule,

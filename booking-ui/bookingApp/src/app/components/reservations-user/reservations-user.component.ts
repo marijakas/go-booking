@@ -8,51 +8,53 @@ import { DeleteDestinationComponent } from '../delete-destination/delete-destina
 @Component({
   selector: 'app-reservations-user',
   templateUrl: './reservations-user.component.html',
-  styleUrls: ['./reservations-user.component.scss']
+  styleUrls: ['./reservations-user.component.scss'],
 })
 export class ReservationsUserComponent implements OnInit {
   reservations: Array<Reservation> = [];
-  constructor(private authservice: UserService, private service: ReservationService, public dialog: MatDialog) { }
+  constructor(
+    private authservice: UserService,
+    private service: ReservationService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getAllRes();
   }
   logOut(): void {
     this.authservice.logout();
-    location.replace("http://localhost:4200/home");
+    location.replace('http://localhost:4200/home');
   }
 
-  getAllRes(){
-    this.service.getReservationsForUser(Number(localStorage.getItem('UserId'))).subscribe((data: any) => {
-      let res: Reservation;
-      console.log("putovanja su ", data)
-      data.forEach(obj => {
-        res = new Reservation();
-        res.ID = obj.ID;
-        res.number_of_seats = obj.number_of_seats;
-        res.sold = obj.sold;
-        res.travel_name=obj.travel_name;
-        this.reservations.push(res);
-
-      });
-      console.log(this.reservations + "putovanja")
-    }, error => {
-
-    });
-
-
+  getAllRes() {
+    this.service
+      .getReservationsForUser(Number(localStorage.getItem('UserId')))
+      .subscribe(
+        (data: any) => {
+          let res: Reservation;
+           
+          data.forEach((obj) => {
+            res = new Reservation();
+            res.ID = obj.ID;
+            res.number_of_seats = obj.number_of_seats;
+            res.sold = obj.sold;
+            res.travel_name = obj.travel_name;
+            this.reservations.push(res);
+          });
+          
+        },
+        (error) => {}
+      );
   }
-  
 
-    delete(r:Reservation):void{
-   
+  delete(r: Reservation): void {
     this.service.deleteReservation(r.ID);
   }
-  cancelReservation(r:Reservation) {
+  cancelReservation(r: Reservation) {
     const dialogRef = this.dialog.open(DeleteDestinationComponent);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
-      if (result){
+      if (result) {
         this.delete(r);
       }
     });

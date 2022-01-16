@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../destination-microservice/.idea/destination-microservice.iml" filepath="$PROJECT_DIR$/../destination-microservice/.idea/destination-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ratings-microservice/.idea/ratings-microservice.iml" filepath="$PROJECT_DIR$/../ratings-microservice/.idea/ratings-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../reservation-microservice/.idea/reservation-microservice.iml" filepath="$PROJECT_DIR$/../reservation-microservice/.idea/reservation-microservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/travel-microservice.iml" filepath="$PROJECT_DIR$/.idea/travel-microservice.iml" />
     </modules>
   </component>

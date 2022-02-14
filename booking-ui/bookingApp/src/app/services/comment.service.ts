@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
+import { Comment } from '../models/Comment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,28 @@ export class CommentService {
   
    }
 
-
-
+   addResrvation(res:Comment){
+    const body = JSON.stringify(res);
+    console.log(body)
+    return this.http
+      .post<any>('http://localhost:9094/api/addComment', body)
+      .subscribe(
+        (val) => {
+          console.log('PUT call successful value returned in body', val);
+          this.openSnackBar();
+          window.location.reload();
+        },
+        (response) => {
+          console.log('PUT call in error', response);
+        },
+        () => {
+          console.log('The PUT observable is now completed.');
+        }
+      );
+  }
+  openSnackBar() {
+    this._snackBar.open('Operation is successfull', 'OK', {
+      duration: 2000,
+    });
+  }
 }

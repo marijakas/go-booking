@@ -3,6 +3,10 @@ appMaterialElevation>
    <mat-card-header class="header"> 
     
      <mat-card-title>{{destination.name}}</mat-card-title>
+      <div class="starsRating"> <!--<mat-icon class="star">star</mat-icon> -->
+        
+        {{destination.average_rate| number:'1.1-1'}} <img class="star" src="assets/images/star.png">
+    </div>
      <mat-card-subtitle>{{destination.country}}</mat-card-subtitle>
       
      

@@ -1,7 +1,10 @@
  
 .naslov{text-align: center;
-font-size: 50px;
-margin-top: 5px;}
+font-size: 80px;
+margin-top: 5px;
+color: azure;
+font-family: cursive;
+}
 
 .bg{
     width: 100%;
@@ -17,4 +20,12 @@ margin-top: 5px;}
    }
   button{
       display: block;
+  }
+
+  
+  .naslovDiv{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
   }

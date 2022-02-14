@@ -1,0 +1,15 @@
+<h2 class="center" >Comments</h2>
+ 
+<hr>
+
+<div class="row" >
+    <div  class="comment" *ngFor = "let comment of comments">
+        <app-comment 
+        [comment]="comment"></app-comment>  
+        <hr>
+    </div>
+    <div class="row row-text" *ngIf="!comments.length">
+        <p>No comments to display.</p>
+    </div>
+    
+</div>

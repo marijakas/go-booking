@@ -44,6 +44,7 @@ import { ReservationsUserComponent } from './components/reservations-user/reserv
 import { ReservationsAllComponent } from './components/reservations-all/reservations-all.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { AddCommentDialogComponent } from './components/add-comment-dialog/add-comment-dialog.component';
 
  @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { CommentComponent } from './components/comment/comment.component';
     ReservationsUserComponent,
     ReservationsAllComponent,
     CommentsComponent,
-    CommentComponent
+    CommentComponent,
+    AddCommentDialogComponent
    ],
   imports: [
     BrowserModule,

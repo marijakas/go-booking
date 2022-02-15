@@ -12,7 +12,7 @@ export class CommentService {
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
   bear  = localStorage.getItem("token");
   
-  headers: HttpHeaders = new HttpHeaders({"Authorization": "Bearer " + this.bear})
+  headers: HttpHeaders = new HttpHeaders({"Authorization": "Bearer " + this.bear,'content-type': 'application/json'})
 
  
 
@@ -22,11 +22,12 @@ export class CommentService {
   
    }
 
-   addResrvation(res:Comment){
+   addComment(res:Comment){
     const body = JSON.stringify(res);
     console.log(body)
+    console.log("TOKEN", this.bear)
     return this.http
-      .post<any>('http://localhost:9094/api/addComment', body)
+      .post<any>('http://localhost:9092/api/addComment', body,{headers :this.headers})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);

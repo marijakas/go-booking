@@ -159,12 +159,14 @@ func GetComments(rw http.ResponseWriter, r *http.Request) {
 }
 
 func AddComment(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Access-Control-Allow-Origin", "*")
 
+	rw.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var comment data_model.Comment
 	json.NewDecoder(r.Body).Decode(&comment)
 
 	authHeader := r.Header.Get("Authorization")
-	splitToken := strings.Split(authHeader, "Bearer ")
+	splitToken := strings.Split(authHeader, "Bearer")
 	reqToken := splitToken[1]
 
 	commentForReturn, err := data_model.AddComment(&comment, reqToken)

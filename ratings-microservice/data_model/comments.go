@@ -75,7 +75,7 @@ func GetComments(id int) (Comments, error) {
 }
 
 
-func AddComment(c *Comment, token string) (*Comment, error) {
+func AddComment(c *Comment) (*Comment, error) {
 	db, err = gorm.Open("postgres", "host=localhost port=5435 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
@@ -84,37 +84,37 @@ func AddComment(c *Comment, token string) (*Comment, error) {
 	}
 	defer db.Close()
 
-	var bearer = "Bearer " + token
-	req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(c.DestinationID), nil)
+	//var bearer = "Bearer " + token
+	//req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(c.DestinationID), nil)
+	//
+	//req.Header.Add("Authorization", bearer)
+	//
+	//client := &http.Client{}
+	//resp, err := client.Do(req)
+	//if err != nil {
+	//	return nil, ErrDestinationNotFound
+	//}
+	//defer resp.Body.Close()
+	//
+	//var dest Destination
+	//if err := json.NewDecoder(resp.Body).Decode(&dest); err != nil {
+	//	return nil, ErrDestinationNotFound
+	//}
 
-	req.Header.Add("Authorization", bearer)
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, ErrDestinationNotFound
-	}
-	defer resp.Body.Close()
-
-	var dest Destination
-	if err := json.NewDecoder(resp.Body).Decode(&dest); err != nil {
-		return nil, ErrDestinationNotFound
-	}
-
-	claims := jwt.MapClaims{}
-	jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
-		return []byte("123456asdf"), nil
-	})
-
-	sub := claims["sub"].(map[string]interface{})
-	id := sub["id"].(float64)
-	username := sub["username"].(string)
-
-	c.UserID = int(id)
-	c.Username = username
-
-	c.UserID = int(id)
-	c.Username = username
+	//claims := jwt.MapClaims{}
+	//jwt.ParseWithClaims(token, claims, func(tok *jwt.Token) (interface{}, error) {
+	//	return []byte("123456asdf"), nil
+	//})
+	//
+	//sub := claims["sub"].(map[string]interface{})
+	//id := sub["id"].(float64)
+	//username := sub["username"].(string)
+	//
+	//c.UserID = int(id)
+	//c.Username = username
+	//
+	//c.UserID = int(id)
+	//c.Username = username
 	db.Create(c)
 
 	return c, nil

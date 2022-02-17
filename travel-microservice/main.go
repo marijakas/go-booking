@@ -4,16 +4,18 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	gohandlers "github.com/gorilla/handlers"
+	"strings"
+
+	//gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/rs/cors"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
-	"strings"
 	"time"
 	"travel-microservice/data_model"
 )
@@ -43,19 +45,38 @@ func main() {
 	router.HandleFunc("/api/travels", UpdateTravels).Methods("PUT")
 	router.HandleFunc("/api/travelsByDestination/{id:[0-9]+}", GetTravelsByDestination).Methods("GET")
 	router.HandleFunc("/api/travel/{id:[0-9]+}", FindTravel).Methods("GET")
-	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteTravel).Methods("DELETE")
+	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteTravel).Methods("DELETE","GET")
 
 
 	l := log.New(os.Stdout, "destination-api ", log.LstdFlags)
-	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
+	//ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
+	//
+	//
+	//
+	//s := http.Server{
+	//	Addr:         ":9091",
+	//	Handler:      ch(router),
+	//	ErrorLog:     l,
+	//	ReadTimeout:  10 * time.Second,
+	//	WriteTimeout: 20 * time.Second,
+	//	IdleTimeout:  120 * time.Second,
+	//}
+	//r := routing.NewRouter()
+	cf := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:4200"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Page", "PerPage", "Content-Type"},
+		AllowCredentials: true,
+		Debug:            true,
+	})
 
 	s := http.Server{
-		Addr:         ":9091",
-		Handler:      ch(router),
-		ErrorLog:     l,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 20 * time.Second,
-		IdleTimeout:  120 * time.Second,
+		Addr:         ":9091",           // configure the bind address
+		Handler:      cf.Handler(router),     // set the default handler
+		ErrorLog:     l,               // set the logger for the server
+		ReadTimeout:  10 * time.Second,  // max time to read request from the client
+		WriteTimeout: 20 * time.Second,  // max time to write response to the client
+		IdleTimeout:  120 * time.Second, // max time for connections using TCP Keep-Alive
 	}
 	go func() {
 		l.Println("Starting server on port 9091")
@@ -76,6 +97,13 @@ func main() {
 
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	s.Shutdown(ctx)
+}
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
+	(*w).Header().Set("Content-Type", "application/json")
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Headers", "append,delete,entries,foreach,get,has,keys,set,values,Authorization")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT")
 }
 func GetTravels(rw http.ResponseWriter, r *http.Request) {
 
@@ -144,7 +172,7 @@ func  GetTravelsByDestination(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 func  DeleteTravel(rw http.ResponseWriter, r *http.Request) {
-
+	//enableCors(&rw)
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {

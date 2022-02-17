@@ -5,10 +5,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	gohandlers "github.com/gorilla/handlers"
+
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/rs/cors"
 	"log"
 	"net/http"
 	"os"
@@ -75,15 +76,31 @@ func main(){
 
 
 
-	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
+	//ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
+	//
+	//s := http.Server{
+	//	Addr:         ":9090",
+	//	Handler:      ch(router),
+	//	ErrorLog:     l,
+	//	ReadTimeout:  10 * time.Second,
+	//	WriteTimeout: 20 * time.Second,
+	//	IdleTimeout:  120 * time.Second,
+	//}
+	cf := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:4200"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Page", "PerPage", "Content-Type"},
+		AllowCredentials: true,
+		Debug:            true,
+	})
 
 	s := http.Server{
-		Addr:         ":9090",
-		Handler:      ch(router),
-		ErrorLog:     l,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 20 * time.Second,
-		IdleTimeout:  120 * time.Second,
+		Addr:         ":9090",           // configure the bind address
+		Handler:      cf.Handler(router),     // set the default handler
+		ErrorLog:     l,               // set the logger for the server
+		ReadTimeout:  10 * time.Second,  // max time to read request from the client
+		WriteTimeout: 20 * time.Second,  // max time to write response to the client
+		IdleTimeout:  120 * time.Second, // max time for connections using TCP Keep-Alive
 	}
 	go func() {
 		l.Println("Starting server on port 9090")

@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ca3f12cc-82dd-4d67-9533-ac14e141532a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-admin/destinations-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-admin/destinations-admin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-admin/destinations-admin.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-admin/destinations-admin.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-user/destinations-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-user/destinations-user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-user/destinations-user.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-ui/bookingApp/src/app/components/destinations-user/destinations-user.component.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

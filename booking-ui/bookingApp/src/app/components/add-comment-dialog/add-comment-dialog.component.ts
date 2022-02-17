@@ -32,8 +32,10 @@ export class AddCommentDialogComponent implements OnInit {
   public onAddCus(): void {
     let comment = new Comment();
      comment.destination_id = Number(this.data.dataKey);
-    comment.text = this.addCusForm.get('text').value;
-   
+      comment.text = this.addCusForm.get('text').value;
+      comment.user_id = Number(localStorage.getItem('idUser'));
+      comment.username = localStorage.getItem('username');
+
      this.service.addComment(comment);
      this.dialog.closeAll();
      

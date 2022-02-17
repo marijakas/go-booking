@@ -5,9 +5,9 @@
     <p>No destinations to display.</p>
 </div>
 <div> 
-<div class="wrapper destination">
+<div class="wrapper destination destinacije">
      
-        <div *ngFor = "let destination of destinations">
+        <div class="destinacije" *ngFor = "let destination of destinations">
             <mat-grid-list cols="2" >
                 <app-destination-item-user [destination]="destination" class="page destination"></app-destination-item-user>
 

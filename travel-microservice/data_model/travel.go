@@ -180,7 +180,7 @@ func UpdateTravels(d *Destination) error {
 
 var ErrTravelCannotBeDeleted = fmt.Errorf("Travel cannot be deleted")
 func DeleteTravel(id int, token string) error {
-	destination, err := FindTravel(id)
+	travel, err := FindTravel(id)
 	if err != nil {
 		return err
 	}
@@ -194,32 +194,32 @@ func DeleteTravel(id int, token string) error {
 	}
 	defer db.Close()
 
-	var bearer = "Bearer " + token
-	req, err := http.NewRequest("GET", "http://localhost:9091/api/travelsByDestination/" + strconv.Itoa(id), nil)
-	req.Header.Add("Authorization", bearer)
+	//var bearer = "Bearer " + token
+	//req, err := http.NewRequest("GET", "http://localhost:9091/api/travelsByDestination/" + strconv.Itoa(id), nil)
+	//req.Header.Add("Authorization", bearer)
+	//
+	//client := &http.Client{}
+	//resp, err := client.Do(req)
+	//if err != nil {
+	//
+	//	return err
+	//}
+	//defer resp.Body.Close()
+	//
+	//var travels Travels
+	//
+	//if err := json.NewDecoder(resp.Body).Decode(&travels); err != nil {
+	//
+	//	return err
+	//}
+	//
+	//
+	//if len(travels) != 0 {
+	//
+	//	return ErrTravelCannotBeDeleted
+	//}
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-
-		return err
-	}
-	defer resp.Body.Close()
-
-	var travels Travels
-
-	if err := json.NewDecoder(resp.Body).Decode(&travels); err != nil {
-
-		return err
-	}
-
-
-	if len(travels) != 0 {
-
-		return ErrTravelCannotBeDeleted
-	}
-
-	db.Delete(destination)
+	db.Delete(travel)
 
 	return nil
 }

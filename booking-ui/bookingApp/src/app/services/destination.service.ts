@@ -69,7 +69,7 @@ export class DestinationService {
         (val) => {
           console.log('PUT call successful value returned in body', val);
           this.openSnackBar();
-          window.location.reload();
+     
         },
         (response) => {
           console.log('PUT call in error', response);

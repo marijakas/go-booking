@@ -4,10 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	gohandlers "github.com/gorilla/handlers"
+
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/rs/cors"
 	"log"
 	"net/http"
 	"os"
@@ -53,15 +54,31 @@ func main(){
 	router.HandleFunc("/api/comments/{id:[0-9]+}", GetComments).Methods("GET")
 	router.HandleFunc("/api/deleteComment/{id:[0-9]+}", DeleteComment).Methods("DELETE")
 
-	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
+	//ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
+	//
+	//s := http.Server{
+	//	Addr:         ":9092",
+	//	Handler:      ch(router),
+	//	ErrorLog:     l,
+	//	ReadTimeout:  10 * time.Second,
+	//	WriteTimeout: 20 * time.Second,
+	//	IdleTimeout:  120 * time.Second,
+	//}
+	cf := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:4200"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Page", "PerPage", "Content-Type"},
+		AllowCredentials: true,
+		Debug:            true,
+	})
 
 	s := http.Server{
-		Addr:         ":9092",
-		Handler:      ch(router),
-		ErrorLog:     l,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 20 * time.Second,
-		IdleTimeout:  120 * time.Second,
+		Addr:         ":9092",           // configure the bind address
+		Handler:      cf.Handler(router),     // set the default handler
+		ErrorLog:     l,               // set the logger for the server
+		ReadTimeout:  10 * time.Second,  // max time to read request from the client
+		WriteTimeout: 20 * time.Second,  // max time to write response to the client
+		IdleTimeout:  120 * time.Second, // max time for connections using TCP Keep-Alive
 	}
 	go func() {
 		l.Println("Starting server on port 9092")
@@ -159,17 +176,15 @@ func GetComments(rw http.ResponseWriter, r *http.Request) {
 }
 
 func AddComment(rw http.ResponseWriter, r *http.Request) {
-	rw.Header().Set("Access-Control-Allow-Origin", "*")
 
-	rw.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var comment data_model.Comment
 	json.NewDecoder(r.Body).Decode(&comment)
+	//
+	//authHeader := r.Header.Get("Authorization")
+	//splitToken := strings.Split(authHeader, "Bearer")
+	//reqToken := splitToken[1]
 
-	authHeader := r.Header.Get("Authorization")
-	splitToken := strings.Split(authHeader, "Bearer")
-	reqToken := splitToken[1]
-
-	commentForReturn, err := data_model.AddComment(&comment, reqToken)
+	commentForReturn, err := data_model.AddComment(&comment)
 
 	if err == data_model.ErrDestinationNotFound {
 		http.Error(rw, "Destination doesn't exists", http.StatusBadRequest)

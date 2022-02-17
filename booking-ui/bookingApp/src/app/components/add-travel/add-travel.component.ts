@@ -44,11 +44,16 @@ export class AddTravelComponent implements OnInit {
     this.trvl.price = Number(this.addCusForm.get('price').value);
     this.trvl.description= this.addCusForm.get('description').value;
     this.trvl.destination_id = Number(this.data.dataKey);
-    this.trvl.date_time = this.addCusForm.get('date_time').value;
+    this.trvl.date_time = String(this.addCusForm.get('date_time').value);
     this.trvl.free_seats = Number(this.addCusForm.get('free_seats').value);
 
     console.log('travel - ', this.trvl)
-   // this.service.addTravel(this.trvl);
+    //datum koji se salje na back: Tue Jan 18 2022 00:00:00 GMT+0100 (Central European Standard Time)
+    //prvo formatirati da bude Jan 18 2022 pa poslati na back 
+    var newArray = this.trvl.date_time.split(" ");
+    console.log(newArray)
+    this.trvl.date_time = newArray[1] + " " + newArray[2] + " " + newArray[3];
+    this.service.addTravel(this.trvl);
     this.dialog.closeAll();
      
      

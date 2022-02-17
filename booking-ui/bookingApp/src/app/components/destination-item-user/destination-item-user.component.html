@@ -1,8 +1,8 @@
-<mat-card class="example-card" routerLink="/destinationUser/{{destination.ID}}"  matTooltip="Open to see travels" 
+<mat-card class="example-card" 
 appMaterialElevation>
    <mat-card-header class="header"> 
     
-     <mat-card-title>{{destination.name}}</mat-card-title>
+     <mat-card-title routerLink="/destinationUser/{{destination.ID}}"  matTooltip="Open to see travels" >{{destination.name}}</mat-card-title>
       <div class="starsRating"> <!--<mat-icon class="star">star</mat-icon> -->
         
         {{destination.average_rate| number:'1.1-1'}} <img class="star" src="assets/images/star.png">

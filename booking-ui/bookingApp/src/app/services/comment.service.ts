@@ -42,6 +42,31 @@ export class CommentService {
         }
       );
   }
+
+
+  deleteComment(commentId: number) {
+    return this.http.delete('http://localhost:9092/api/deleteComment/' + commentId, {headers: this.headers})
+      .subscribe(
+        (val) => {
+          console.log('PUT call successful value returned in body', val);
+          this.openSnackBar();
+     
+        },
+        (response) => {
+          console.log('PUT call in error', response);
+          this.openSnackBarErr();
+        },
+        () => {
+          console.log('The PUT observable is now completed.');
+        }
+      );
+  }
+
+  openSnackBarErr() {
+    this._snackBar.open('Error occured!', 'OK', {
+      duration: 2000,
+    });
+  }
   openSnackBar() {
     this._snackBar.open('Operation is successfull', 'OK', {
       duration: 2000,

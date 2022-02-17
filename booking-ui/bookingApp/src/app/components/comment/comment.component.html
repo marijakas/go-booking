@@ -2,6 +2,9 @@
   <mat-card-header class="header">
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ comment.username }}</mat-card-title>
+    <button *ngIf=" username== comment.username" mat-icon-button class="warn" class="deleteComment" matTooltip="Delete comment" (click)="openDeleteComment(comment)">
+      <mat-icon>delete</mat-icon>
+    </button> 
     <mat-card-subtitle>{{
       comment.CreatedAt | date: "medium"
     }}</mat-card-subtitle>

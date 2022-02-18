@@ -46,7 +46,7 @@ func main() {
 	router.HandleFunc("/api/travelsByDestination/{id:[0-9]+}", GetTravelsByDestination).Methods("GET")
 	router.HandleFunc("/api/travel/{id:[0-9]+}", FindTravel).Methods("GET")
 	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteTravel).Methods("DELETE","GET")
-
+	router.HandleFunc("/api/updateTravel/{id:[0-9]+}", UpdateOneTravel).Methods("PUT")
 
 	l := log.New(os.Stdout, "destination-api ", log.LstdFlags)
 	//ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
@@ -105,6 +105,32 @@ func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Headers", "append,delete,entries,foreach,get,has,keys,set,values,Authorization")
 	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT")
 }
+
+func UpdateOneTravel(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
+		return
+	}
+	var travel data_model.Travel
+	json.NewDecoder(r.Body).Decode(&travel)
+
+
+
+	err = data_model.UpdateOneTravel(id, &travel)
+
+	if err == data_model.ErrTravelNotFound {
+		http.Error(rw, "Travel not found", http.StatusNotFound)
+		return
+	}
+
+	if err != nil {
+		http.Error(rw, "Travel not found", http.StatusInternalServerError)
+		return
+	}
+}
+
 func GetTravels(rw http.ResponseWriter, r *http.Request) {
 
 

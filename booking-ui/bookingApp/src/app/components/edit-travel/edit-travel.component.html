@@ -1,48 +1,48 @@
 <div>
-   
     <div class="add-title">
         <button mat-button class="close-icon" [mat-dialog-close]="true">
             <mat-icon>close</mat-icon>
-        </button> 
-         
-           <h1 style="margin-top: 5px;"> 
-              Edit Travel
-           </h1>
-        
-        
-       </div>
-     
-       
-         
-       <mat-form-field>
-           <mat-label>Name of travel</mat-label>
-        <input matInput placeholder="Name"[(ngModel)]="trvl.name" formControlName="name" name="name"  required>
-         
-       
-      </mat-form-field>
+        </button>
 
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-     <input matInput placeholder="Name" [(ngModel)]="trvl.description" formControlName="description" name="description"  required>
-      
-    
-   </mat-form-field>
-
-   <mat-form-field>
-    <mat-label>Destination</mat-label>
- <input matInput placeholder="price" [(ngModel)]="trvl.price" formControlName="price" name="price"  required>
-  
-
-</mat-form-field>
-  
-
-       
-         
-        
-        <div class="buttons">
-            <button mat-raised-button type="button" class="Discard-btn"  (click)="saveChanges(trvl)" >Save changes</button>
-            <button mat-raised-button type="button" class="Discard-btn"  (click)="openDialog()" >Cancel</button>
+        <h1 style="margin-top: 5px">Edit Travel</h1>
+    </div>
+    <mat-grid-list cols="1" rowHeight="85px">
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Name of travel </mat-label>
+                    <input matInput placeholder="Name" [(ngModel)]="trvl.name" name="name" required />
+                </mat-form-field>
             </div>
-        
-    
+        </mat-grid-tile>
+
+
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Description </mat-label>
+                    <input matInput placeholder="Description" [(ngModel)]="trvl.description" name="description" required />
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Price </mat-label>
+                    <input matInput placeholder="Price" [(ngModel)]="trvl.price" name="price" required />
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+         
+    </mat-grid-list>
+
+    <div class="buttons">
+        <button mat-raised-button type="button" class="Discard-btn"  [disabled]="!saveChangesEnabled()" (click)="saveChanges(trvl)">
+            Save changes
+        </button>
+        <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">
+            Cancel
+        </button>
+    </div>
 </div>

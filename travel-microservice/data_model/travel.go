@@ -1,6 +1,5 @@
 package data_model
 
-
 import (
 	"encoding/json"
 	"errors"
@@ -153,6 +152,32 @@ func AddTravel(t *Travel) error {
 
 	t.DestinationName = destination.Name
 	db.Create(t)
+
+	return nil
+}
+func UpdateOneTravel(id int, d *Travel) error {
+	travel, err := FindTravel(id)
+	if err != nil {
+		return err
+	}
+
+	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+
+
+
+	travel.Name = d.Name
+	travel.Description = d.Description
+	travel.Price = d.Price
+
+
+
+
+
+	db.Save(travel)
 
 	return nil
 }

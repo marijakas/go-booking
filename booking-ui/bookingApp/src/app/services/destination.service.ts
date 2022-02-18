@@ -121,4 +121,22 @@ export class DestinationService {
         }
       );
   }
+
+  updateTravel(travel: Travel) {
+    const body=JSON.stringify(travel);
+    return this.http.put<any>('http://localhost:9091/api/updateTravel/'+travel.ID, body, {headers: this.headers}).subscribe(
+      (val) => {
+          console.log("PUT call successful value returned in body", 
+                      val);
+      },
+      response => {
+          console.log("PUT call in error", response);
+          this.openSnackBarErr();
+      },
+      () => {
+          console.log("The PUT observable is now completed.");
+          this.openSnackBar();
+      });
+  
+   }
 }

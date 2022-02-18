@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Travel } from 'src/app/models/Travel';
 import { DestinationService } from 'src/app/services/destination.service';
 
@@ -22,12 +23,25 @@ export class EditTravelComponent implements OnInit {
     free_seats:0
    }
    public addCusForm: FormGroup;
-  constructor(private fb: FormBuilder,
+  constructor(private route: ActivatedRoute, private fb: FormBuilder,
     public dialog: MatDialog, public service: DestinationService,   @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.trvl= this.data.dataKey;
     console.log("NAZIV TRAVELA" , this.trvl.name)
+
+    // this.route.params
+    //   .subscribe(
+    //     (params: Params) => {
+         
+    //       this.trvl.destination_id = params['id'];
+           
+ 
+
+    //     }
+
+    //   );
+
 
   }
   openDialog(): void {
@@ -39,12 +53,15 @@ export class EditTravelComponent implements OnInit {
   }
 
   saveChangesEnabled() {
-    //return this.addCusForm.value.name.length > 0 &&  this.addCusForm.value.price.length > 0 &&  this.addCusForm.value.description.length > 0;
+    return this.trvl.name.length > 0 &&  this.trvl.price > 0 &&  this.trvl.description.length > 0;
   }
  
   saveChanges(travel:Travel) {
-console.log("TRAVEL ZA CUVANJE", travel)  }
- 
+   console.log("TRAVEL ZA CUVANJE", travel)
+   this.service.updateTravel(travel);
+   this.dialog.closeAll();
+  }
+
   formChanged() {
     this.wasFormChanged = true;
   }

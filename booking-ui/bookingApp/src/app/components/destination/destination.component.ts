@@ -58,6 +58,7 @@ export class DestinationComponent implements OnInit {
         trav.description = obj.description;
         trav.date_time = obj.date_time;
         trav.free_seats=obj.free_seats;
+        trav.destination_id = Number(this.idDest);
         this.travels.push(trav);
 
       });

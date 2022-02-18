@@ -7,6 +7,9 @@ appMaterialElevation>
         
         {{destination.average_rate| number:'1.1-1'}} <img class="star" src="assets/images/star.png">
     </div>
+    <button mat-icon-button color="primary"  matTooltip="Rate destination" (click) = "openDialogRateDestination(destination)">
+      <mat-icon>grade</mat-icon>
+    </button>
      <mat-card-subtitle>{{destination.country}}</mat-card-subtitle>
       
      

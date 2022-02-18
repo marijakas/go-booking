@@ -45,6 +45,7 @@ import { ReservationsAllComponent } from './components/reservations-all/reservat
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { AddCommentDialogComponent } from './components/add-comment-dialog/add-comment-dialog.component';
+import { RateDestinationComponent } from './components/rate-destination/rate-destination.component';
 
  @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AddCommentDialogComponent } from './components/add-comment-dialog/add-c
     ReservationsAllComponent,
     CommentsComponent,
     CommentComponent,
-    AddCommentDialogComponent
+    AddCommentDialogComponent,
+    RateDestinationComponent
    ],
   imports: [
     BrowserModule,

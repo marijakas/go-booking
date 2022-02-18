@@ -1,0 +1,37 @@
+<div>
+   
+    <div class="add-title">
+        <button mat-button class="close-icon" [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button> 
+      <h2 class="primary">Rate destination 1-5</h2>
+    </div>
+    <div>
+      <form [formGroup]="addCusForm" (change)="formChanged()">
+        <mat-grid-list cols="1"   rowHeight="85px" (window:resize)="onResize($event)">
+
+            <mat-grid-tile >
+             <div>
+                <mat-form-field>
+                    <input  matInput placeholder="Rating 1 - 5" value={{ratingValue}} formControlName="ratingValue" name="ratingValue"  required>
+                    <mat-error *ngIf="addCusForm.controls.ratingValue.hasError('required')" name="nameReq">
+                      Please enter you rating
+                    </mat-error>
+                   
+                  </mat-form-field>
+             </div>
+            </mat-grid-tile>
+
+          
+
+    </mat-grid-list>
+        <div class="btn-sec">
+          <button mat-raised-button type="submit" color="primary" class="Update-btn"  [disabled]="!saveChangesEnabled()" name="saveDest" (click)="onAddCus()" >Save</button>
+          <button mat-raised-button type="button" class="Discard-btn"  (click)="openDialog()" >Cancel</button>
+        </div>
+  
+      </form>
+  
+    </div>
+  </div>
+  

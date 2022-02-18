@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Comment } from '../models/Comment';
+import { Rating } from '../models/Rating';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,27 @@ export class CommentService {
     console.log("TOKEN", this.bear)
     return this.http
       .post<any>('http://localhost:9092/api/addComment', body,{headers :this.headers})
+      .subscribe(
+        (val) => {
+          console.log('PUT call successful value returned in body', val);
+          this.openSnackBar();
+          window.location.reload();
+        },
+        (response) => {
+          console.log('PUT call in error', response);
+        },
+        () => {
+          console.log('The PUT observable is now completed.');
+        }
+      );
+  }
+
+  addRating(res:Rating){
+    const body = JSON.stringify(res);
+    console.log(body)
+    console.log("TOKEN", this.bear)
+    return this.http
+      .put<any>('http://localhost:9092/api/addRating', body,{headers :this.headers})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);

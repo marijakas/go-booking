@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Destination } from 'src/app/models/Destination';
 import { DestinationService } from 'src/app/services/destination.service';
 import { DeleteDestinationComponent } from '../delete-destination/delete-destination.component';
+import { EditDestinationComponent } from '../edit-destination/edit-destination.component';
 
 @Component({
   selector: 'app-destination-item',
@@ -21,7 +22,11 @@ export class DestinationItemComponent implements OnInit {
   }
 
   saveChanges(desti: Destination) {
-    //this.se.updateDestination(post1);
+    const dialogRef = this.dialog.open(EditDestinationComponent, {
+      width: '640px', disableClose: true, data: {
+        dataKey: desti
+      }
+    });
   }
 
   deletePost(desti: Destination){

@@ -1,0 +1,48 @@
+<div>
+    <div class="add-title">
+        <button mat-button class="close-icon" [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <h1 style="margin-top: 5px">Edit destination</h1>
+    </div>
+    <mat-grid-list cols="1" rowHeight="85px">
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Name of destination </mat-label>
+                    <input matInput placeholder="Name" [(ngModel)]="dest.name" name="name" required />
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Description </mat-label>
+                    <input matInput placeholder="Description" [(ngModel)]="dest.description" name="description" required />
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Country </mat-label>
+                    <input matInput placeholder="Country" [(ngModel)]="dest.country" name="country" required />
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+         
+    </mat-grid-list>
+
+    <div class="buttons">
+        <button mat-raised-button type="button" class="Discard-btn"  [disabled]="!saveChangesEnabled()" (click)="saveChanges(dest)">
+            Save changes
+        </button>
+        <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">
+            Cancel
+        </button>
+    </div>
+</div>

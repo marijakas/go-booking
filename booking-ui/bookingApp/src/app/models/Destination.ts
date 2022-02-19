@@ -2,6 +2,6 @@ export class Destination {
     ID: number;
     name: string;
     description:string;
-    country: number;
+    country: string;
     average_rate: string;
 }

@@ -46,6 +46,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { AddCommentDialogComponent } from './components/add-comment-dialog/add-comment-dialog.component';
 import { RateDestinationComponent } from './components/rate-destination/rate-destination.component';
+import { EditDestinationComponent } from './components/edit-destination/edit-destination.component';
 
  @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { RateDestinationComponent } from './components/rate-destination/rate-des
     CommentsComponent,
     CommentComponent,
     AddCommentDialogComponent,
-    RateDestinationComponent
+    RateDestinationComponent,
+    EditDestinationComponent
    ],
   imports: [
     BrowserModule,

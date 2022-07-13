@@ -146,6 +146,7 @@ func UpdateDestination(id int, d *Destination) error {
 	destination.Country = d.Country
 	destination.AverageRate = d.AverageRate
 
+
 	//ako se izmeni naziv destinacije treba ga promeniti u svim putovanjima gde se pojavljivala ta destinacija
 	if oldName != d.Name {
 		//var bearer = "Bearer " + token

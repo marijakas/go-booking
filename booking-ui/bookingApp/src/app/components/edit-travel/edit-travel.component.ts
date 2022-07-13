@@ -48,6 +48,7 @@ export class EditTravelComponent implements OnInit {
  
   saveChanges(travel:Travel) {
    console.log("TRAVEL ZA CUVANJE", travel)
+   travel.price = Number(travel.price);
    this.service.updateTravel(travel);
    this.dialog.closeAll();
   }

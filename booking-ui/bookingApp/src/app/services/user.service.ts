@@ -75,7 +75,7 @@ addUser(user:User)  {
 }
 
 openSnackBarS() {
-this._snackBar.open("Check your email.", "OK", {
+this._snackBar.open("Successfull.", "OK", {
   duration: 4000,
 });
 }

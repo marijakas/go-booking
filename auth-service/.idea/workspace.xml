@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca3f12cc-82dd-4d67-9533-ac14e141532a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../travel-microservice/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../travel-microservice/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../travel-microservice/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../travel-microservice/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -93,7 +93,7 @@ func FindTravel(id int) (*Travel, error) {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
@@ -167,15 +167,9 @@ func UpdateOneTravel(id int, d *Travel) error {
 	}
 	defer db.Close()
 
-
-
 	travel.Name = d.Name
 	travel.Description = d.Description
 	travel.Price = d.Price
-
-
-
-
 
 	db.Save(travel)
 
@@ -219,30 +213,6 @@ func DeleteTravel(id int, token string) error {
 	}
 	defer db.Close()
 
-	//var bearer = "Bearer " + token
-	//req, err := http.NewRequest("GET", "http://localhost:9091/api/travelsByDestination/" + strconv.Itoa(id), nil)
-	//req.Header.Add("Authorization", bearer)
-	//
-	//client := &http.Client{}
-	//resp, err := client.Do(req)
-	//if err != nil {
-	//
-	//	return err
-	//}
-	//defer resp.Body.Close()
-	//
-	//var travels Travels
-	//
-	//if err := json.NewDecoder(resp.Body).Decode(&travels); err != nil {
-	//
-	//	return err
-	//}
-	//
-	//
-	//if len(travels) != 0 {
-	//
-	//	return ErrTravelCannotBeDeleted
-	//}
 
 	db.Delete(travel)
 

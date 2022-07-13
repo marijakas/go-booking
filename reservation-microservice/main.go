@@ -126,11 +126,6 @@ func  DeleteDestination(rw http.ResponseWriter, r *http.Request) {
 		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
 		return
 	}
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer ")
-	//reqToken := splitToken[1]
-
-
 	err = data_model.DeleteReservation(id)
 
 	if err == data_model.ErrReservationNotFound {

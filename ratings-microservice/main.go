@@ -24,7 +24,6 @@ import (
 var db *gorm.DB
 var err error
 
-//database name:>>> go_booking_ratings_comments
 
 func main(){
 
@@ -54,16 +53,6 @@ func main(){
 	router.HandleFunc("/api/comments/{id:[0-9]+}", GetComments).Methods("GET")
 	router.HandleFunc("/api/deleteComment/{id:[0-9]+}", DeleteComment).Methods("DELETE")
 
-	//ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
-	//
-	//s := http.Server{
-	//	Addr:         ":9092",
-	//	Handler:      ch(router),
-	//	ErrorLog:     l,
-	//	ReadTimeout:  10 * time.Second,
-	//	WriteTimeout: 20 * time.Second,
-	//	IdleTimeout:  120 * time.Second,
-	//}
 	cf := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:4200"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -179,10 +168,6 @@ func AddComment(rw http.ResponseWriter, r *http.Request) {
 
 	var comment data_model.Comment
 	json.NewDecoder(r.Body).Decode(&comment)
-	//
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer")
-	//reqToken := splitToken[1]
 
 	commentForReturn, err := data_model.AddComment(&comment)
 

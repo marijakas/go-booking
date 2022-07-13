@@ -45,9 +45,9 @@ func (d *Destination) Validate() error {
 	validate := validator.New()
 	return validate.Struct(d)
 }
-type Destionations []*Destination
+type Destinations []*Destination
 
-func (d *Destionations) ToJSON(w io.Writer) error {
+func (d *Destinations) ToJSON(w io.Writer) error {
 	e := json.NewEncoder(w)
 	return e.Encode(d)
 }
@@ -86,7 +86,7 @@ func UpdateDestinationAverageRate(id int, average float32) error {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 
@@ -96,7 +96,7 @@ func UpdateDestinationAverageRate(id int, average float32) error {
 
 	return nil
 }
-func GetDestinations() Destionations {
+func GetDestinations() Destinations {
 	db, err = gorm.Open("postgres", "host=localhost port=5434 user=postgres dbname=go_booking_destinations sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
@@ -108,7 +108,7 @@ func GetDestinations() Destionations {
 	var destinations []Destination
 	db.Find(&destinations)
 
-	var forReturn Destionations
+	var forReturn Destinations
 	for i, _ := range destinations {
 		forReturn = append(forReturn, &destinations[i])
 	}
@@ -120,7 +120,7 @@ func AddDestination(d *Destination) {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 	defer db.Close()
 	db.Create(d)
@@ -147,13 +147,10 @@ func UpdateDestination(id int, d *Destination) error {
 	destination.AverageRate = d.AverageRate
 
 
-	//ako se izmeni naziv destinacije treba ga promeniti u svim putovanjima gde se pojavljivala ta destinacija
+
 	if oldName != d.Name {
-		//var bearer = "Bearer " + token
 		jsonValue, _ := json.Marshal(destination)
 		req, err := http.NewRequest("PUT", "http://localhost:9091/api/travels", bytes.NewBuffer(jsonValue))
-		//req.Header.Add("Authorization", bearer)
-
 		client := &http.Client{}
 		resp, err := client.Do(req)
 		if err != nil {
@@ -184,10 +181,9 @@ func DeleteDestination(id int) error {
 	}
 	defer db.Close()
 
-	//var bearer = "Bearer " + token
+
 	req, err := http.NewRequest("GET", "http://localhost:9091/api/travelsByDestination/" + strconv.Itoa(id), nil)
-	////req.Header.Add("Authorization", bearer)
-	//
+
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {

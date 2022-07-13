@@ -31,7 +31,7 @@ func main() {
 	if err != nil{
 		log.Fatal(err)
 	}else{
-		fmt.Println("Successfuly connected to database!")
+		fmt.Println("Successfully connected to database!")
 	}
 
 	//closing connection to database
@@ -49,19 +49,6 @@ func main() {
 	router.HandleFunc("/api/updateTravel/{id:[0-9]+}", UpdateOneTravel).Methods("PUT")
 
 	l := log.New(os.Stdout, "destination-api ", log.LstdFlags)
-	//ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
-	//
-	//
-	//
-	//s := http.Server{
-	//	Addr:         ":9091",
-	//	Handler:      ch(router),
-	//	ErrorLog:     l,
-	//	ReadTimeout:  10 * time.Second,
-	//	WriteTimeout: 20 * time.Second,
-	//	IdleTimeout:  120 * time.Second,
-	//}
-	//r := routing.NewRouter()
 	cf := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:4200"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -198,7 +185,6 @@ func  GetTravelsByDestination(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 func  DeleteTravel(rw http.ResponseWriter, r *http.Request) {
-	//enableCors(&rw)
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {

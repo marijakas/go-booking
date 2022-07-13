@@ -74,18 +74,6 @@ func main(){
 	router.HandleFunc("/api/updateDestinationAverage/{id:[0-9]+}/{average[0-9]+\\.?[0-9]*}", UpdateDestinationAverageRate).Methods("PUT")
 	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteDestination).Methods("DELETE")
 
-
-
-	//ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
-	//
-	//s := http.Server{
-	//	Addr:         ":9090",
-	//	Handler:      ch(router),
-	//	ErrorLog:     l,
-	//	ReadTimeout:  10 * time.Second,
-	//	WriteTimeout: 20 * time.Second,
-	//	IdleTimeout:  120 * time.Second,
-	//}
 	cf := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:4200"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -173,16 +161,8 @@ func UpdateDestination(rw http.ResponseWriter, r *http.Request) {
 		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
 		return
 	}
-
-
-
 	var destination data_model.Destination
 	json.NewDecoder(r.Body).Decode(&destination)
-
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer ")
-	//reqToken := splitToken[1]
-
 	err = data_model.UpdateDestination(id, &destination)
 
 	if err == data_model.ErrDestinationNotFound {
@@ -231,11 +211,6 @@ func  DeleteDestination(rw http.ResponseWriter, r *http.Request) {
 		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
 		return
 	}
-	//authHeader := r.Header.Get("Authorization")
-	//splitToken := strings.Split(authHeader, "Bearer ")
-	//reqToken := splitToken[1]
-
-
 	err = data_model.DeleteDestination(id)
 
 	if err == data_model.ErrDestinationCannotBeDeleted {

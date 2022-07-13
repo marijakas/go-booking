@@ -44,8 +44,7 @@ def run():
 if __name__ == '__main__':
     # try:
     #
-    #     db.session.add(User(username='manager', email='adminpera@gmail.com', first_name="Pera", last_name="Peric", role="ROLE_ADMIN", password=generate_password_hash('123456')))
-    #     db.session.add(User(username='worker', email='vodicmika@gmail.com', first_name="Mika", last_name="Mikic", role="ROLE_GUIDE", password=generate_password_hash('123456')))
+    #     db.session.add(User(username='adminpera@gmail.com', email='adminpera@gmail.com', first_name="Pera", last_name="Peric", role="ROLE_ADMIN", password=generate_password_hash('123456')))
     #     db.session.commit()
     # except:
     #

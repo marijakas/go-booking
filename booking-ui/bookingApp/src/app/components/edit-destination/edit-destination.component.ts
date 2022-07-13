@@ -42,7 +42,6 @@ export class EditDestinationComponent implements OnInit {
   }
  
   saveChanges(destination:Destination) {
-   console.log("TRAVEL ZA CUVANJE", destination)
    this.service.updateDestination(destination);
    this.dialog.closeAll();
   }

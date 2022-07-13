@@ -14,7 +14,7 @@ export class DestinationsUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllDestinations();
-  console.log(this.destinations.length)  }
+     }
 
   getAllDestinations(){
 

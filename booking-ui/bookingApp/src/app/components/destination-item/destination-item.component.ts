@@ -30,14 +30,12 @@ export class DestinationItemComponent implements OnInit {
   }
 
   deletePost(desti: Destination){
-    console.log(desti)
     this.service.deleteDestination(desti.ID);
   }
 
   openDeleteDest(desti: Destination) {
     const dialogRef = this.dialog.open(DeleteDestinationComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result){
         this.deletePost(desti);
       }

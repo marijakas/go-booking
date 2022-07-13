@@ -22,7 +22,6 @@ export class CommentComponent implements OnInit {
   openDeleteComment(comment: Comment) {
     const dialogRef = this.dialog.open(DeleteDestinationComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result){
         this.service.deleteComment(comment.ID);
         

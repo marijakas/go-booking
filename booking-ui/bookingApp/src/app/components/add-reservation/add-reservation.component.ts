@@ -43,11 +43,7 @@ export class AddReservationComponent implements OnInit {
     this.res.reservation_date = 12122022;
     this.res.travel_id=this.trvl.ID;
     this.res.user_id= Number(localStorage.getItem('idUser'));
-
-   
-
-    console.log('travel - ', this.trvl)
-   this.service.addResrvation(this.res);
+    this.service.addResrvation(this.res);
     this.dialog.closeAll();
      
      

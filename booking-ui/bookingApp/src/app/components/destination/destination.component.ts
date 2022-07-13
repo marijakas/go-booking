@@ -49,7 +49,6 @@ export class DestinationComponent implements OnInit {
 
     this.service.getTravels(id).subscribe((data: any) => {
       let trav: Travel;
-      console.log("putovanja su ", data)
       data.forEach(obj => {
         trav = new Travel();
         trav.ID = obj.ID;
@@ -62,7 +61,6 @@ export class DestinationComponent implements OnInit {
         this.travels.push(trav);
 
       });
-      console.log(this.travels + "putovanja")
     }, error => {
 
     });
@@ -74,13 +72,11 @@ export class DestinationComponent implements OnInit {
     location.replace("http://localhost:4200/home");
   }
   delete(u:Travel):void{
-    console.log(u)
     this.service.deleteTravel(u.ID);
   }
   deleteTravel(u:Travel) {
     const dialogRef = this.dialog.open(DeleteDestinationComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result){
         this.delete(u);
       }

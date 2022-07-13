@@ -30,11 +30,9 @@ export class UserService {
                 localStorage.setItem('username', username);
                 localStorage.setItem('role',userTokenState.user.role )
                 localStorage.setItem('idUser', userTokenState.user.id)
-                console.log(userTokenState.user.role + 'USERTOKST')
-                console.log(userTokenState.token)
+             
             }
             else{
-              console.log("nema tokena")
             }
 
             return userTokenState.token;

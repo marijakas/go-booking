@@ -16,7 +16,6 @@ export class AddUserService {
 
 
   addAdmin(user:User)  {
-   console.log("usao")
     const body=JSON.stringify(user);
      
     return this.http.post<any>('http://127.0.0.1:5000/auth/add-admin', body, {headers: this.headers}).subscribe(

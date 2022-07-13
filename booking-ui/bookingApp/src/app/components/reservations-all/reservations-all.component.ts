@@ -50,7 +50,6 @@ export class ReservationsAllComponent implements OnInit {
   cancelReservation(r: Reservation) {
     const dialogRef = this.dialog.open(DeleteDestinationComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
       if (result) {
         this.delete(r);
       }

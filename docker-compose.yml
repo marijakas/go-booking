@@ -1,0 +1,127 @@
+version: "3.8"
+
+services:
+
+  go_booking_ratings_comments:
+    image: postgres
+    container_name: go_booking_ratings_comments
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports: 
+      - "5435:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  ratings-microservice:
+    image: ratings-microservice:compose_build
+    build:
+      context: ./ratings-microservice
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    ports:
+      - "9092:9092"
+    depends_on:
+      - go_booking_ratings_comments
+   
+  go_booking_destinations:
+    image: postgres
+    container_name: go_booking_destinations
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports: 
+      - "5434:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  destination-microservice:
+    image: destination-microservice:compose_build
+    build:
+      context: ./destination-microservice
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    ports:
+      - "9090:9090"
+    depends_on:
+      - go_booking_destinations
+
+   
+   
+  go_booking_travels:
+    image: postgres
+    container_name: go_booking_travels
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports: 
+      - "5437:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  travel-microservice:
+    image: travel-microservice:compose_build
+    build:
+      context: ./travel-microservice
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    ports:
+      - "9091:9091"
+    depends_on:
+      - go_booking_travels
+   
+   
+   
+  go_booking_reservations:
+    image: postgres
+    container_name: go_booking_reservations
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports: 
+      - "5436:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  reservation-microservice:
+    image: reservation-microservice:compose_build
+    build:
+      context: ./reservation-microservice
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    ports:
+      - "9094:9094"
+    depends_on:
+      - go_booking_reservations
+   
+   
+  frontend-app:
+    image: booking-app
+    container_name: booking-app
+    ports:
+      - '4200:4200'
+       
+
+volumes:
+  data-users:
+
+networks:
+  backend:
+    name: go-booking
+    driver: bridge

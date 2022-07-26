@@ -46,7 +46,7 @@ func (c *Comments) ToJSON(w io.Writer) error {
 }
 
 func GetComments(id int) (Comments, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5435 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -76,7 +76,7 @@ func GetComments(id int) (Comments, error) {
 
 
 func AddComment(c *Comment) (*Comment, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5435 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -91,7 +91,7 @@ var ErrCommentNotFound = fmt.Errorf("Comment not found")
 var ErrCommentCannotBeDeleted = fmt.Errorf("Comment cannot be deleted")
 
 func GetComment(id int) (*Comment, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5435 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -115,7 +115,7 @@ func DeleteComment(id int, token string) error {
 		return err
 	}
 
-	db, err = gorm.Open("postgres", "host=localhost port=5435 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_ratings_comments sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{

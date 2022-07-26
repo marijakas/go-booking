@@ -67,7 +67,7 @@ var db *gorm.DB
 var err error
 
 func GetTravels() Travels {
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -89,7 +89,7 @@ func GetTravels() Travels {
 var ErrTravelNotFound = fmt.Errorf("Travel not found")
 
 func FindTravel(id int) (*Travel, error) {
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -107,7 +107,7 @@ func FindTravel(id int) (*Travel, error) {
 	return &travel, nil
 }
 func GetTravelsByDestination(id int) Travels {
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -127,7 +127,7 @@ func GetTravelsByDestination(id int) Travels {
 }
 
 func AddTravel(t *Travel) error {
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -161,7 +161,7 @@ func UpdateOneTravel(id int, d *Travel) error {
 		return err
 	}
 
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 	if err != nil {
 		panic("failed to connect database")
 	}
@@ -177,7 +177,7 @@ func UpdateOneTravel(id int, d *Travel) error {
 }
 
 func UpdateTravels(d *Destination) error {
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{
@@ -205,7 +205,7 @@ func DeleteTravel(id int, token string) error {
 	}
 
 
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 	if err != nil{
 		log.Fatal(err)
 	}else{

@@ -25,7 +25,7 @@ var err error
 
 //main funkcija
 func main() {
-	db, err = gorm.Open("postgres", "host=localhost port=5437 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
+	db, err = gorm.Open("postgres", "host=host.docker.internal port=5432 user=postgres dbname=go_booking_travels sslmode=disable password=12345")
 
 	//oppening connection to database
 	if err != nil{

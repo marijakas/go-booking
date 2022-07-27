@@ -3,16 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ca3f12cc-82dd-4d67-9533-ac14e141532a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../destination-microservice/data_model/destinations.go" beforeDir="false" afterPath="$PROJECT_DIR$/../destination-microservice/data_model/destinations.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../destination-microservice/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../destination-microservice/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/data_model/comments.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/data_model/comments.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/data_model/ratings.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/data_model/ratings.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ratings-microservice/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ratings-microservice/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reservation-microservice/data_model/reservation.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reservation-microservice/data_model/reservation.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reservation-microservice/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reservation-microservice/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../travel-microservice/data_model/travel.go" beforeDir="false" afterPath="$PROJECT_DIR$/../travel-microservice/data_model/travel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../travel-microservice/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../travel-microservice/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,6 +82,9 @@
       <updated>1637746553574</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

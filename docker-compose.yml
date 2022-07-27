@@ -111,6 +111,32 @@ services:
       - go_booking_reservations
    
    
+  go_booking_users:
+    image: postgres
+    container_name: go_booking_users
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports: 
+      - "5433:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  auth-service:
+    image: auth-service:compose_build
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - go_booking_users
+   
   frontend-app:
     image: booking-app
     container_name: booking-app

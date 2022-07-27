@@ -23,7 +23,7 @@ export class UserService {
 }
 
   login(username: string, password: string) {
-    return this.http.post<any>('http://127.0.0.1:5000/auth/sign-in', { 'username':username,'password': password })
+    return this.http.post<any>('http://localhost:5000/auth/sign-in', { 'username':username,'password': password })
         .pipe(map(userTokenState => {
             if (userTokenState.token) {
                 localStorage.setItem('token', userTokenState.token);
@@ -56,7 +56,7 @@ isLoggedIn(): boolean {
 addUser(user:User)  {
   
   const body=JSON.stringify(user);
-  return this.http.post<any>('http://127.0.0.1:5000/auth/sign-up',body, {headers: this.headers}).subscribe(
+  return this.http.post<any>('http://localhost:5000/auth/sign-up',body, {headers: this.headers}).subscribe(
     (val) => {
         console.log("POST call successful value returned in body", 
                     val);

@@ -16,7 +16,7 @@ export class DestinationService {
   headers2: HttpHeaders = new HttpHeaders({'content-type': 'application/json'})
   getDestinations(): Observable<Destination[]> {
     return this.http.get<Destination[]>(
-      'http://localhost:9090/api/destinations'
+      'http://localhost:8080/api/destination/destinations'
     );
   }
 
@@ -24,7 +24,7 @@ export class DestinationService {
     const body = JSON.stringify(dest);
 
     return this.http
-      .post<any>('http://localhost:9090/api/addDestination', body)
+      .post<any>('http://localhost:8080/api/destination/addDestination', body)
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);
@@ -41,7 +41,7 @@ export class DestinationService {
   }
 
   deleteDestination(destId: number) {
-    return this.http.delete('http://localhost:9090/api/delete/' + destId, {
+    return this.http.delete('http://localhost:8080/api/destination/delete/' + destId, {
         headers: this.headers,
       })
       .subscribe(
@@ -60,11 +60,11 @@ export class DestinationService {
   }
   getTravels(id:number):Observable<Travel[]>{
 
-    return this.http.get<Travel[]>("http://localhost:9091/api/travelsByDestination/" + id);
+    return this.http.get<Travel[]>("http://localhost:8080/api/travel/travelsByDestination/" + id);
   
    }
    deleteTravel(trvlId: number) {
-    return this.http.delete('http://localhost:9091/api/delete/' + trvlId, {headers: this.headers})
+    return this.http.delete('http://localhost:8080/api/travel/delete/' + trvlId, {headers: this.headers})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);
@@ -82,11 +82,11 @@ export class DestinationService {
   }
 
   getAvgRating(id):Observable<Destination>{
-    return this.http.get<Destination>("http://localhost:9092/api/rating/"+ id)
+    return this.http.get<Destination>("http://localhost:8080/api/rating/rating/"+ id)
   }
   
   getDestById(id):Observable<Destination>{
-    return this.http.get<Destination>("http://localhost:9090/api/destination/"+ id)
+    return this.http.get<Destination>("http://localhost:8080/api/destination/destination/"+ id)
   }
 
 
@@ -106,7 +106,7 @@ export class DestinationService {
     const body = JSON.stringify(travel);
     console.log(body)
     return this.http
-      .post<any>('http://localhost:9091/api/addTravel', body)
+      .post<any>('http://localhost:8080/api/travel/addTravel', body)
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);
@@ -124,7 +124,7 @@ export class DestinationService {
 
   updateTravel(travel: Travel) {
     const body=JSON.stringify(travel);
-    return this.http.put<any>('http://localhost:9091/api/updateTravel/'+travel.ID, body, {headers: this.headers}).subscribe(
+    return this.http.put<any>('http://localhost:8080/api/travel/updateTravel/'+travel.ID, body, {headers: this.headers}).subscribe(
       (val) => {
           console.log("PUT call successful value returned in body", 
                       val);
@@ -144,7 +144,7 @@ export class DestinationService {
 
    updateDestination(destination: Destination) {
     const body=JSON.stringify(destination);
-    return this.http.put<any>('http://localhost:9090/api/updateDestination/'+destination.ID, body, {headers: this.headers}).subscribe(
+    return this.http.put<any>('http://localhost:8080/api/destination/updateDestination/'+destination.ID, body, {headers: this.headers}).subscribe(
       (val) => {
           console.log("PUT call successful value returned in body", 
                       val);

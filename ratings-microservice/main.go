@@ -47,11 +47,11 @@ func main(){
 
 	//API routes
 	router := mux.NewRouter()
-	router.HandleFunc("/api/rating/{id:[0-9]+}", GetRating).Methods("GET")
-	router.HandleFunc("/api/addRating", AddRate).Methods("PUT")
-	router.HandleFunc("/api/addComment", AddComment).Methods("POST")
-	router.HandleFunc("/api/comments/{id:[0-9]+}", GetComments).Methods("GET")
-	router.HandleFunc("/api/deleteComment/{id:[0-9]+}", DeleteComment).Methods("DELETE")
+	router.HandleFunc("/rating/{id:[0-9]+}", GetRating).Methods("GET")
+	router.HandleFunc("/addRating", AddRate).Methods("PUT")
+	router.HandleFunc("/addComment", AddComment).Methods("POST")
+	router.HandleFunc("/comments/{id:[0-9]+}", GetComments).Methods("GET")
+	router.HandleFunc("/deleteComment/{id:[0-9]+}", DeleteComment).Methods("DELETE")
 
 	cf := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:4200"},
@@ -153,7 +153,7 @@ func GetComments(rw http.ResponseWriter, r *http.Request) {
 
 	lc, err := data_model.GetComments(id)
 	if err == data_model.ErrDestinationNotFound {
-		http.Error(rw, "Movie doesn't exists", http.StatusBadRequest)
+		http.Error(rw, "Comments doesn't exist", http.StatusBadRequest)
 		return
 	}
 

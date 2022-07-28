@@ -67,15 +67,15 @@ func main(){
 
 	//API routes
 	router := mux.NewRouter()
-	router.HandleFunc("/api/destinations", GetDestinations).Methods("GET")
-	router.HandleFunc("/api/destination/{id:[0-9]+}", GetOneDestination).Methods("GET")
-	router.HandleFunc("/api/addDestination", AddDestination).Methods("POST")
-	router.HandleFunc("/api/updateDestination/{id:[0-9]+}", UpdateDestination).Methods("PUT")
-	router.HandleFunc("/api/updateDestinationAverage/{id:[0-9]+}/{average[0-9]+\\.?[0-9]*}", UpdateDestinationAverageRate).Methods("PUT")
-	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteDestination).Methods("DELETE")
+	router.HandleFunc("/destinations", GetDestinations).Methods("GET")
+	router.HandleFunc("/destination/{id:[0-9]+}", GetOneDestination).Methods("GET")
+	router.HandleFunc("/addDestination", AddDestination).Methods("POST")
+	router.HandleFunc("/updateDestination/{id:[0-9]+}", UpdateDestination).Methods("PUT")
+	router.HandleFunc("/updateDestinationAverage/{id:[0-9]+}/{average[0-9]+\\.?[0-9]*}", UpdateDestinationAverageRate).Methods("PUT")
+	router.HandleFunc("/delete/{id:[0-9]+}", DeleteDestination).Methods("DELETE")
 
 	cf := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:4200"},
+		AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Authorization", "Page", "PerPage", "Content-Type"},
 		AllowCredentials: true,

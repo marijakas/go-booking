@@ -18,7 +18,7 @@ export class AddUserService {
   addAdmin(user:User)  {
     const body=JSON.stringify(user);
      
-    return this.http.post<any>('http://localhost:5000/auth/add-admin', body, {headers: this.headers}).subscribe(
+    return this.http.post<any>('http://localhost:8080/api/user/auth/add-admin', body, {headers: this.headers}).subscribe(
       (val) => {
           console.log("PUT call successful value returned in body", 
                       val);
@@ -37,7 +37,7 @@ export class AddUserService {
    
   const body=JSON.stringify(user);
    
-  return this.http.post<any>('http://localhost:5000/auth/add-guide', body, {headers: this.headers}).subscribe(
+  return this.http.post<any>('http://localhost:8080/api/user/auth/add-guide', body, {headers: this.headers}).subscribe(
     (val) => {
         console.log("PUT call successful value returned in body", 
                     val);

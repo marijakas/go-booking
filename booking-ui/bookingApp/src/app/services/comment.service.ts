@@ -19,16 +19,14 @@ export class CommentService {
 
    getAllCommentsForDestination(idDestination: number):Observable<Comment[]>{
 
-    return this.http.get<Comment[]>("http://localhost:9092/api/comments/" + idDestination);
+    return this.http.get<Comment[]>("http://localhost:8080/api/rating/comments/" + idDestination);
   
    }
 
    addComment(res:Comment){
     const body = JSON.stringify(res);
-    console.log(body)
-    console.log("TOKEN", this.bear)
     return this.http
-      .post<any>('http://localhost:9092/api/addComment', body,{headers :this.headers})
+      .post<any>('http://localhost:8080/api/rating/addComment', body,{headers :this.headers})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);
@@ -46,10 +44,8 @@ export class CommentService {
 
   addRating(res:Rating){
     const body = JSON.stringify(res);
-    console.log(body)
-    console.log("TOKEN", this.bear)
     return this.http
-      .put<any>('http://localhost:9092/api/addRating', body,{headers :this.headers})
+      .put<any>('http://localhost:8080/api/rating/addRating', body,{headers :this.headers})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);
@@ -67,7 +63,7 @@ export class CommentService {
 
 
   deleteComment(commentId: number) {
-    return this.http.delete('http://localhost:9092/api/deleteComment/' + commentId, {headers: this.headers})
+    return this.http.delete('http://localhost:8080/api/rating/deleteComment/' + commentId, {headers: this.headers})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);

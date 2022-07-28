@@ -24,7 +24,7 @@ export class ReservationService {
     const body = JSON.stringify(res);
     console.log(body)
     return this.http
-      .post<any>('http://localhost:9094/api/addReservation', body)
+      .post<any>('http://localhost:8080/api/reservation/addReservation', body)
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);
@@ -41,14 +41,14 @@ export class ReservationService {
   }
   getReservationsForUser(id:number):Observable<Reservation[]>{
 
-    return this.http.get<Reservation[]>("http://localhost:9094/api/getReservationsByUser/" + id);
+    return this.http.get<Reservation[]>("http://localhost:8080/api/reservation/getReservationsByUser/" + id);
   
 
    }
 
    getReservationsAll():Observable<Reservation[]>{
 
-    return this.http.get<Reservation[]>("http://localhost:9094/api/getReservations");
+    return this.http.get<Reservation[]>("http://localhost:8080/api/reservation/getReservations");
   
    }
    openSnackBarErr() {
@@ -58,7 +58,7 @@ export class ReservationService {
   }
 
    deleteReservation(resId: number) {
-    return this.http.delete('http://localhost:9094/api/deleteReservation/' + resId, {headers: this.headers2})
+    return this.http.delete('http://localhost:8080/api/reservation/deleteReservation/' + resId, {headers: this.headers2})
       .subscribe(
         (val) => {
           console.log('PUT call successful value returned in body', val);

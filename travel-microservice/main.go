@@ -40,17 +40,17 @@ func main() {
 	db.AutoMigrate(&data_model.Travel{})
 
 	router := mux.NewRouter()
-	router.HandleFunc("/api/getTravels", GetTravels).Methods("GET")
-	router.HandleFunc("/api/addTravel", AddTravel).Methods("POST")
-	router.HandleFunc("/api/travels", UpdateTravels).Methods("PUT")
-	router.HandleFunc("/api/travelsByDestination/{id:[0-9]+}", GetTravelsByDestination).Methods("GET")
-	router.HandleFunc("/api/travel/{id:[0-9]+}", FindTravel).Methods("GET")
-	router.HandleFunc("/api/delete/{id:[0-9]+}", DeleteTravel).Methods("DELETE","GET")
-	router.HandleFunc("/api/updateTravel/{id:[0-9]+}", UpdateOneTravel).Methods("PUT")
+	router.HandleFunc("/getTravels", GetTravels).Methods("GET")
+	router.HandleFunc("/addTravel", AddTravel).Methods("POST")
+	router.HandleFunc("/travels", UpdateTravels).Methods("PUT")
+	router.HandleFunc("/travelsByDestination/{id:[0-9]+}", GetTravelsByDestination).Methods("GET")
+	router.HandleFunc("/travel/{id:[0-9]+}", FindTravel).Methods("GET")
+	router.HandleFunc("/delete/{id:[0-9]+}", DeleteTravel).Methods("DELETE","GET")
+	router.HandleFunc("/updateTravel/{id:[0-9]+}", UpdateOneTravel).Methods("PUT")
 
 	l := log.New(os.Stdout, "destination-api ", log.LstdFlags)
 	cf := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:4200"},
+		AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Authorization", "Page", "PerPage", "Content-Type"},
 		AllowCredentials: true,

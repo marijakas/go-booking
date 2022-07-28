@@ -40,13 +40,13 @@ func main() {
 
 
 	router := mux.NewRouter()
-	router.HandleFunc("/api/addReservation", AddReservation).Methods("POST")
-	router.HandleFunc("/api/getReservations", GetReservations).Methods("GET")
-	router.HandleFunc("/api/getReservationsByUser/{id:[0-9]+}", GetReservationsByUser).Methods("GET")
-	router.HandleFunc("/api/deleteReservation/{id:[0-9]+}", DeleteDestination).Methods("DELETE")
+	router.HandleFunc("/addReservation", AddReservation).Methods("POST")
+	router.HandleFunc("/getReservations", GetReservations).Methods("GET")
+	router.HandleFunc("/getReservationsByUser/{id:[0-9]+}", GetReservationsByUser).Methods("GET")
+	router.HandleFunc("/deleteReservation/{id:[0-9]+}", DeleteDestination).Methods("DELETE")
 	l := log.New(os.Stdout, "reservation-api ", log.LstdFlags)
 	cf := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:4200"},
+		AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Authorization", "Page", "PerPage", "Content-Type"},
 		AllowCredentials: true,

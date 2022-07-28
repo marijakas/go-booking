@@ -9,5 +9,5 @@ COPY go.sum .
 RUN go mod download
 COPY . .
 RUN go build -o travel-microservice
-EXPOSE 9091
+EXPOSE 8080
 CMD ["./travel-microservice"]

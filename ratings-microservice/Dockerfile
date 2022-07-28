@@ -9,5 +9,5 @@ COPY go.sum .
 RUN go mod download
 COPY . .
 RUN go build -o ratings-microservice
-EXPOSE 9092
+EXPOSE 8080
 CMD ["./ratings-microservice"]

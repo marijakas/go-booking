@@ -6,6 +6,6 @@ ENV FLASK_RUN_HOST=0.0.0.0
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 RUN pip3 install psycopg2-binary
-EXPOSE 5000
+EXPOSE 8080
 COPY . .
 CMD ["flask", "run"]

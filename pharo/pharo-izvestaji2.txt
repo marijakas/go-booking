@@ -1,0 +1,40 @@
+| body names avgRat ds response chs dateFromStr dateToStr destinations destLab login accessor session collects|
+	
+body := NeoJSONWriter toString: { 
+				#Name -> name.
+				#DestinationName -> destinationName.
+				#DateTime -> dateTime.
+				#Price -> price.
+				#FreeSeats -> freeSeats.
+		}asDictionary .
+		
+
+
+response := (ZnClient new)
+  url: 'http://localhost:8080/api/travel/getTravels';
+  contents: body;	
+  get;
+  response.
+
+
+chs := response contents.
+chs.
+destinations := NeoJSONReader fromString: chs.
+
+
+destLab := Dictionary new.
+
+names := destinations collect: [ :each | each at: 'name' ].
+avgRat := destinations collect: [ :each | each at: 'free_seats' ].
+names do: [ :each | destLab  add: ((each at: 1) -> (each at: 2)) ].
+
+b:= RTGrapher new.
+
+ds:= RTData new.
+ds dotShape color: Color red.
+ds points: avgRat. 
+ds y: #yourself.
+b add: ds.
+b axisX title: 'Travels' ; noTick. 
+b axisY title: 'Free seats'.
+b open.

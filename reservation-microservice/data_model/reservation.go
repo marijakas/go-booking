@@ -84,7 +84,7 @@ func AddReservation(t *Reservation) error {
 	}
 	defer db.Close()
 
-	req, err := http.NewRequest("GET", "http://localhost:9091/api/travel/" + strconv.Itoa(t.TravelID), nil)
+	req, err := http.NewRequest("GET", "http://localhost:8080/api/travel/travel/" + strconv.Itoa(t.TravelID), nil)
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil{

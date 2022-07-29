@@ -1,0 +1,49 @@
+Metacello new
+    baseline: 'Roassal2';
+    repository: 'github://ObjectProfile/Roassal2/src';
+    load.
+	
+	Metacello new
+	repository: 'github://svenvc/NeoJSON/repository';
+	baseline: 'NeoJSON';
+	load.
+	
+| body names avgRat ds response chs dateFromStr dateToStr destinations destLab login accessor session collects|
+	
+body := NeoJSONWriter toString: { 
+				#Name -> name.
+				#Country -> country.
+				#Description -> description.
+				#AverageRate -> averageRate.
+		}asDictionary .
+		
+
+
+response := (ZnClient new)
+  url: 'http://localhost:8080/api/destination/destinations';
+  contents: body;	
+  get;
+  response.
+
+
+chs := response contents.
+chs.
+destinations := NeoJSONReader fromString: chs.
+
+
+destLab := Dictionary new.
+
+names := destinations collect: [ :each | each at: 'name' ].
+avgRat := destinations collect: [ :each | each at: 'average_rate' ].
+names do: [ :each | destLab  add: ((each at: 1) -> (each at: 2)) ].
+
+b:= RTGrapher new.
+
+ds:= RTData new.
+ds dotShape color: Color red.
+ds points: avgRat. 
+ds y: #yourself.
+b add: ds.
+b axisX title: 'Destinations' ; noTick. 
+b axisY title: 'User''s Ratings'.
+b open.

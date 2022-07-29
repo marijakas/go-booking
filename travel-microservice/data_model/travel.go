@@ -135,7 +135,7 @@ func AddTravel(t *Travel) error {
 	}
 	defer db.Close()
 
-	req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(t.DestinationId), nil)
+	req, err := http.NewRequest("GET", "http://localhost:8080/api/destination/destination/" + strconv.Itoa(t.DestinationId), nil)
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil{

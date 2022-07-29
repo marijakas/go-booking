@@ -71,7 +71,7 @@ func GetRate(id int, token string) (*Rate, error) {
 	}
 
 	defer db.Close()
-	req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(id), nil)
+	req, err := http.NewRequest("GET", "http://localhost:8080/api/destination/destination/" + strconv.Itoa(id), nil)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -111,7 +111,7 @@ func AddRate(r *Rate, token string) (*Destination, error) {
 	defer db.Close()
 
 	var bearer = "Bearer " + token
-	req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(r.DestinationID), nil)
+	req, err := http.NewRequest("GET", "http://localhost:8080/api/destination/destination/" + strconv.Itoa(r.DestinationID), nil)
 
 	req.Header.Add("Authorization", bearer)
 
@@ -160,7 +160,7 @@ func AddRate(r *Rate, token string) (*Destination, error) {
 	dest.AverageRate = sum/float32(len(rates))
 
 	jsonValue, _ := json.Marshal(dest)
-	putReq, err := http.NewRequest("PUT", "http://localhost:9090/api/updateDestination/" + strconv.Itoa(r.DestinationID), bytes.NewBuffer(jsonValue))
+	putReq, err := http.NewRequest("PUT", "http://localhost:8080/api/destination/updateDestination/" + strconv.Itoa(r.DestinationID), bytes.NewBuffer(jsonValue))
 
 	putReq.Header.Add("Authorization", bearer)
 

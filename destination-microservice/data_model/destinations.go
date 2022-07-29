@@ -150,7 +150,7 @@ func UpdateDestination(id int, d *Destination) error {
 
 	if oldName != d.Name {
 		jsonValue, _ := json.Marshal(destination)
-		req, err := http.NewRequest("PUT", "http://localhost:9091/api/travels", bytes.NewBuffer(jsonValue))
+		req, err := http.NewRequest("PUT", "http://localhost:8080/api/travel/travels", bytes.NewBuffer(jsonValue))
 		client := &http.Client{}
 		resp, err := client.Do(req)
 		if err != nil {
@@ -182,7 +182,7 @@ func DeleteDestination(id int) error {
 	defer db.Close()
 
 
-	req, err := http.NewRequest("GET", "http://localhost:9091/api/travelsByDestination/" + strconv.Itoa(id), nil)
+	req, err := http.NewRequest("GET", "http://localhost:8080/api/travel/travelsByDestination/" + strconv.Itoa(id), nil)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

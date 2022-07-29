@@ -54,7 +54,7 @@ func GetComments(id int) (Comments, error) {
 	}
 	defer db.Close()
 
-	req, err := http.NewRequest("GET", "http://localhost:9090/api/destination/" + strconv.Itoa(id), nil)
+	req, err := http.NewRequest("GET", "http://localhost:8080/api/destination/destination/" + strconv.Itoa(id), nil)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
